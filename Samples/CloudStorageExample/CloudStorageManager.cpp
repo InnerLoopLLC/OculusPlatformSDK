@@ -6,7 +6,9 @@
 #include <string>
 #include <vector>
 
+#ifndef NOMINMAX
 #define NOMINMAX
+#endif
 #include <Windows.h>
 
 #include <OVR_Platform.h>
