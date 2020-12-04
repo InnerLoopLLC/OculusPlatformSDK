@@ -192,6 +192,12 @@ typedef enum ovrMessageType_ {
   /// Extract the payload from the message handle with ::ovr_Message_GetPingResult().
   ovrMessage_Notification_Networking_PingResult = 0x51153012,
 
+  /// Indicates that party has been updated
+  ///
+  /// The message will contain a payload of type ::ovrPartyUpdateNotificationHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetPartyUpdateNotification().
+  ovrMessage_Notification_Party_PartyUpdate = 0x1D118AB2,
+
   /// Indicates that the user has accepted an invitation, for example in Oculus
   /// Home. Use ovr_Message_GetString() to extract the ID of the room that the
   /// user has been inivted to as a string. Then call ovrID_FromString() to parse

@@ -71,6 +71,7 @@
 #include "OVR_Packet.h"
 #include "OVR_Party.h"
 #include "OVR_PartyID.h"
+#include "OVR_PartyUpdateNotification.h"
 #include "OVR_Pid.h"
 #include "OVR_PidArray.h"
 #include "OVR_PingResult.h"
