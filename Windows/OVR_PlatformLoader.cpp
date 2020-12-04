@@ -547,6 +547,7 @@ static ModuleHandleType OVR_FindLibraryPath(int requestedProductVersion, int req
 
 OVRPL_DECLARE_IMPORT(ovrPlatformInitializeResult, ovr_PlatformInitializeWindows, (const char *appId));
 OVRPL_DECLARE_IMPORT(ovrRequest, ovr_PlatformInitializeWindowsAsynchronous, (const char *appId));
+OVRPL_DECLARE_IMPORT(ovrRequest, ovr_PlatformInitializeWithAccessToken, (ovrID appId, const char *accessToken));
 OVRPL_DECLARE_IMPORT(ovrMessage*, ovr_PopMessage, ());
 OVRPL_DECLARE_IMPORT(bool, ovr_IsEntitled, ());
 OVRPL_DECLARE_IMPORT(void, ovr_PlatformInitializeStandaloneAccessToken, (const char *accessToken));
@@ -555,6 +556,7 @@ OVRPL_DECLARE_IMPORT(ovrRequest, ovr_Platform_InitializeStandaloneOculus, (const
 static void LoadFunctions(ModuleHandleType hModule) {
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeWindows);
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeWindowsAsynchronous);
+    OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeWithAccessToken)
     OVRPL_GETFUNCTION(hModule, ovr_PopMessage);
     OVRPL_GETFUNCTION(hModule, ovr_IsEntitled);
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeStandaloneAccessToken);
@@ -679,6 +681,23 @@ OVRPL_PUBLIC_FUNCTION(ovrRequest) ovr_Platform_InitializeStandaloneOculusEx(cons
         *outResult = ovrPlatformInitialize_Uninitialized;
     }
     return 0;
+}
+
+OVRPL_PUBLIC_FUNCTION(ovrRequest) ovr_PlatformInitializeWithAccessTokenEx(
+  ovrID appId,
+  const char *serviceAccessToken,
+  ovrPlatformInitializeResult *outResult,
+  int productVersion,
+  int majorVersion) {
+
+  if (outResult != nullptr) {
+    ovrPlatformInitializeResult result = loaderInitHelper(productVersion, majorVersion);
+    *outResult = result;
+    if (result == ovrPlatformInitialize_Success) {
+      return ovr_PlatformInitializeWithAccessTokenPLPtr(appId, serviceAccessToken);
+    }
+  }
+  return 0;
 }
 
 #endif
