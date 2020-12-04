@@ -11,11 +11,16 @@
 
 class GameState;
 
-enum class CloudStorageState { UNITIALIZED, LOADING_METADATA, LOADING_DATA, NORMAL_GAMEPLAY, DELETING_SAVES};
+enum class CloudStorageState {
+  UNITIALIZED,
+  LOADING_METADATA,
+  LOADING_DATA,
+  NORMAL_GAMEPLAY,
+  DELETING_SAVES
+};
 
-class CloudStorageManager
-{
-public:
+class CloudStorageManager {
+ public:
   CloudStorageManager();
   ~CloudStorageManager() = default;
 
@@ -28,7 +33,7 @@ public:
   void ProcessMessageSave(ovrMessageHandle message, GameState& gameState);
   void ProcessMessageDelete(ovrMessageHandle message);
 
-private:
+ private:
   // State machine to define the behavior of the Tick() method.
   CloudStorageState CurrentState;
 
@@ -44,11 +49,14 @@ private:
   // local hostname used to record the high score for a specific machine
   const std::string ComputerName;
 
-  // map of (save request -> data) to make sure the memory remains untouched until the Save completes.
+  // map of (save request -> data) to make sure the memory remains untouched until the Save
+  // completes.
   std::map<ovrRequest, std::unique_ptr<uint8_t>> SaveRequests;
 
   void SaveGameStateToCloudStorage(const GameState& gameState);
-  std::map<std::string, int64_t> MergeConflictingSaves(const std::vector<char>& local, const std::vector<char>& remote);
+  std::map<std::string, int64_t> MergeConflictingSaves(
+      const std::vector<char>& local,
+      const std::vector<char>& remote);
   std::string GetLocalComputerName() const;
 
   // Each cloud storage entry key will be unique within the bucket so you

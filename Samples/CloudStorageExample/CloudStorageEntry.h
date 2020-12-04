@@ -7,24 +7,26 @@
 
 #include <OVR_Platform.h>
 
-class CloudStorageEntry
-{
-public:
-  CloudStorageEntry(const char *extraData, int64_t counter, ovrCloudStorageDataStatus status);
+class CloudStorageEntry {
+ public:
+  CloudStorageEntry(const char* extraData, int64_t counter, ovrCloudStorageDataStatus status);
   CloudStorageEntry() = default;
   ~CloudStorageEntry() = default;
   CloudStorageEntry(const CloudStorageEntry&) = default;
   CloudStorageEntry(CloudStorageEntry&&) = default;
-  CloudStorageEntry &CloudStorageEntry::operator =(const CloudStorageEntry &) = default;
+  CloudStorageEntry& CloudStorageEntry::operator=(const CloudStorageEntry&) = default;
 
-  bool HasDataLoaded() const { return DataLoaded; }
+  bool HasDataLoaded() const {
+    return DataLoaded;
+  }
 
   static std::pair<std::unique_ptr<uint8_t>, uint32_t> SerializeScore(int64_t score);
-  static std::pair<std::unique_ptr<uint8_t>, uint32_t> SerializeScores(std::map<std::string, int64_t>& scores);
+  static std::pair<std::unique_ptr<uint8_t>, uint32_t> SerializeScores(
+      std::map<std::string, int64_t>& scores);
   static int64_t DeserializeScore(const void* scores);
   static std::map<std::string, int64_t> DeserializeScores(const char* scores);
 
-private:
+ private:
   std::string ExtraData;
   int64_t Counter;
   ovrCloudStorageDataStatus Status;

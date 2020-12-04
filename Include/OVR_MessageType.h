@@ -57,6 +57,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_IAP_GetViewerPurchases                              = 0x3A0F8419, ///< Generated in response to ovr_IAP_GetViewerPurchases()
   ovrMessage_IAP_LaunchCheckoutFlow                              = 0x3F9B0D0D, ///< Generated in response to ovr_IAP_LaunchCheckoutFlow()
   ovrMessage_LanguagePack_GetCurrent                             = 0x1F90F0D5, ///< Generated in response to ovr_LanguagePack_GetCurrent()
+  ovrMessage_LanguagePack_SetCurrent                             = 0x5B4FBBE0, ///< Generated in response to ovr_LanguagePack_SetCurrent()
   ovrMessage_Leaderboard_GetEntries                              = 0x5DB3474C, ///< Generated in response to ovr_Leaderboard_GetEntries()
   ovrMessage_Leaderboard_GetEntriesAfterRank                     = 0x18378BEF, ///< Generated in response to ovr_Leaderboard_GetEntriesAfterRank()
   ovrMessage_Leaderboard_GetNextEntries                          = 0x4E207CD9, ///< Generated in response to ovr_Leaderboard_GetNextEntries()
@@ -136,6 +137,18 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrAssetFileDownloadUpdateHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetAssetFileDownloadUpdate().
   ovrMessage_Notification_AssetFile_DownloadUpdate = 0x2FDD0CCD,
+
+  /// Result of a leader picking an application for CAL launch.
+  ///
+  /// The message will contain a payload of type ::ovrCalApplicationFinalizedHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetCalApplicationFinalized().
+  ovrMessage_Notification_Cal_FinalizeApplication = 0x750C5099,
+
+  /// Application that the group leader has proposed for a CAL launch.
+  ///
+  /// The message will contain a payload of type ::ovrCalApplicationProposedHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetCalApplicationProposed().
+  ovrMessage_Notification_Cal_ProposeApplication = 0x2E7451F5,
 
   /// Sent to indicate that more data has been read or an error occured.
   ///

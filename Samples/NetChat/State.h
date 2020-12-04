@@ -23,7 +23,6 @@
 //
 #define FILTER_POOL "filter_pool"
 
-
 // For this test we have a pool created with the pool key set as 'bout_pool'
 // Mode is set to 'Bout'
 // Skill Pool is set to 'None'
@@ -32,62 +31,61 @@
 //
 #define BOUT_POOL "bout_pool"
 
-typedef struct messageStruct
-{
-	int packetID;
-	char textString[BUFFER_SIZE];
-}chatMessage;
+typedef struct messageStruct {
+  int packetID;
+  char textString[BUFFER_SIZE];
+} chatMessage;
 
-enum states{
-	NOT_INIT = 0,
-	IDLE,
-	REQUEST_FIND,
-	FINDING_ROOM,
-	REQUEST_CREATE,
-	REQUEST_JOIN,
-	REQUEST_LEAVE,
-	IN_EMPTY_ROOM,
-	IN_FULL_ROOM
+enum states {
+  NOT_INIT = 0,
+  IDLE,
+  REQUEST_FIND,
+  FINDING_ROOM,
+  REQUEST_CREATE,
+  REQUEST_JOIN,
+  REQUEST_LEAVE,
+  IN_EMPTY_ROOM,
+  IN_FULL_ROOM
 };
 
-class machineState{
-public:
-	machineState() {
-		currentState = NOT_INIT; 
-		localUserID = 0;
-		remoteUserID = 0;
-		roomID = 0;
-	};
+class machineState {
+ public:
+  machineState() {
+    currentState = NOT_INIT;
+    localUserID = 0;
+    remoteUserID = 0;
+    roomID = 0;
+  };
 
-	~machineState(){};
+  ~machineState(){};
 
-	void init(ovrMessage *message);
+  void init(ovrMessage* message);
 
-	void requestCreateRoom();
-	void createRoomResponse(ovrMessage *message);
-	void requestCreateFilterRoom();
-	void requestFindMatch();
-	void findMatchResponse(ovrMessage *message);
+  void requestCreateRoom();
+  void createRoomResponse(ovrMessage* message);
+  void requestCreateFilterRoom();
+  void requestFindMatch();
+  void findMatchResponse(ovrMessage* message);
   void requestFindRoom();
   void requestFindFilteredRoom();
 
-	void foundMatch(ovrMessage *message);
-	void joinRoomResponse(ovrMessage *message);
-	void requestLeaveRoom();
-	void leaveRoomResponse(ovrMessage *message);
-	void requestStartRatedMatch();
-	void startRatedMatchResponse(ovrMessage *message);
-	void requestReportResults();
-	void reportResultsResponse(ovrMessage *message);
-	void sendChat(char* chatMessage);
-	void updateRoom(ovrMessage *message);
+  void foundMatch(ovrMessage* message);
+  void joinRoomResponse(ovrMessage* message);
+  void requestLeaveRoom();
+  void leaveRoomResponse(ovrMessage* message);
+  void requestStartRatedMatch();
+  void startRatedMatchResponse(ovrMessage* message);
+  void requestReportResults();
+  void reportResultsResponse(ovrMessage* message);
+  void sendChat(char* chatMessage);
+  void updateRoom(ovrMessage* message);
 
-private:
-	int	currentState;
-	int lastPacketID = 0;
-	bool ratedMatchStarted = false;
+ private:
+  int currentState;
+  int lastPacketID = 0;
+  bool ratedMatchStarted = false;
 
-	ovrID roomID;
-	ovrID localUserID;
-	ovrID remoteUserID;
+  ovrID roomID;
+  ovrID localUserID;
+  ovrID remoteUserID;
 };

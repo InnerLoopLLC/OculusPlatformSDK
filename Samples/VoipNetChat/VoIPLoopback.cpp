@@ -11,24 +11,21 @@
 
 Audio oAudio;
 
-int main(int argc, char** argv)
-{
-	if (argc < 2) {
-		fprintf(stderr, "usage: VoIPLoopback.exe <appID>");
-		exit(1);
-	}
+int main(int argc, char** argv) {
+  if (argc < 2) {
+    fprintf(stderr, "usage: VoIPLoopback.exe <appID>");
+    exit(1);
+  }
 
-	Audio oAudio;
+  Audio oAudio;
 
-	// Init with false to use OpenAL Microphone instead of OVR
-	if (oAudio.initialize(argv[1], true) != 0)
-	{
-		fprintf(stderr, "Could not initialize the Oculus Platform\n");
-		return 1;
-	}
+  // Init with false to use OpenAL Microphone instead of OVR
+  if (oAudio.initialize(argv[1], true) != 0) {
+    fprintf(stderr, "Could not initialize the Oculus Platform\n");
+    return 1;
+  }
 
-	oAudio.mainLoop();
+  oAudio.mainLoop();
 
   return 0;
 }
-

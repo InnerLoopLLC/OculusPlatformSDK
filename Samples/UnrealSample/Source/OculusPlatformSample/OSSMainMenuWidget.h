@@ -1,4 +1,4 @@
-// Copyright 2016 Oculus VR, LLC All Rights reserved.
+// Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
 #pragma once
 
@@ -7,32 +7,28 @@
 #include "OSSMainMenuWidget.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class OCULUSPLATFORMSAMPLE_API UOSSMainMenuWidget : public UUserWidget
-{
-	GENERATED_BODY()
-	
-private:
+class OCULUSPLATFORMSAMPLE_API UOSSMainMenuWidget : public UUserWidget {
+  GENERATED_BODY()
 
-	FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
+ private:
+  FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
 
-public:
-	UOSSMainMenuWidget(const FObjectInitializer& ObjectInitializer) :
-		UUserWidget(ObjectInitializer)
-	{
-		if (IsRunningCommandlet())
-		{
-			FModuleManager::Get().LoadModule(TEXT("OnlineSubsystem"));
-		}
+ public:
+  UOSSMainMenuWidget(const FObjectInitializer& ObjectInitializer) : UUserWidget(ObjectInitializer) {
+    if (IsRunningCommandlet()) {
+      FModuleManager::Get().LoadModule(TEXT("OnlineSubsystem"));
+    }
 
-		auto OculusSessionInterface = Online::GetSessionInterface();
+    auto OculusSessionInterface = Online::GetSessionInterface();
 
-		OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(this, &UOSSMainMenuWidget::OnJoinSessionComplete);
-		OculusSessionInterface->AddOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegate);
-	}
+    OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(
+        this, &UOSSMainMenuWidget::OnJoinSessionComplete);
+    OculusSessionInterface->AddOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegate);
+  }
 
-	// Non-blueprint version because the blueprint cant handle regular enums
-	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type JoinResult);
+  // Non-blueprint version because the blueprint cant handle regular enums
+  void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type JoinResult);
 };

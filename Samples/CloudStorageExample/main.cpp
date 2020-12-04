@@ -18,18 +18,15 @@
 
 #include <stdio.h>
 
-int main()
-{
+int main() {
   // connect to the local OVRServer process
-  if (ovr_PlatformInitializeWindows(OCULUS_APP_ID) == ovrPlatformInitialize_Success)
-  {
+  if (ovr_PlatformInitializeWindows(OCULUS_APP_ID) == ovrPlatformInitialize_Success) {
     InputHandler input;
     PlatformManager platform;
     GameState gameState;
     RandomGame game;
 
-    while (gameState.GetRunState() != RunState::QUIT)
-    {
+    while (gameState.GetRunState() != RunState::QUIT) {
       input.ProcessInput(gameState);
 
       platform.Tick(gameState);
@@ -39,9 +36,7 @@ int main()
       using namespace std::chrono_literals;
       std::this_thread::sleep_for(100ms);
     }
-  }
-  else 
-  {
+  } else {
     std::cerr << "Failed to Initialize with Oculus Platform." << std::endl;
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2016 Oculus VR, LLC All Rights reserved.
+// Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
 #pragma once
 
@@ -7,24 +7,25 @@
 #include "OSSOculusActor.generated.h"
 
 UCLASS()
-class OCULUSPLATFORMSAMPLE_API AOSSOculusActor : public AActor
-{
-	GENERATED_BODY()
+class OCULUSPLATFORMSAMPLE_API AOSSOculusActor : public AActor {
+  GENERATED_BODY()
 
-protected:
+ protected:
+  FDelegateHandle OnLoginCompleteDelegateHandle;
 
-	FDelegateHandle OnLoginCompleteDelegateHandle;
-	
-public:	
-	// Sets default values for this actor's properties
-	AOSSOculusActor();
+ public:
+  // Sets default values for this actor's properties
+  AOSSOculusActor();
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
+  // Called when the game starts or when spawned
+  virtual void BeginPlay() override;
 
-	virtual void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error) {}
-	
+  // Called every frame
+  virtual void Tick(float DeltaSeconds) override;
+
+  virtual void OnLoginComplete(
+      int32 LocalUserNum,
+      bool bWasSuccessful,
+      const FUniqueNetId& UserId,
+      const FString& Error) {}
 };

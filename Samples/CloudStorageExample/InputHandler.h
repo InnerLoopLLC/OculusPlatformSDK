@@ -2,8 +2,7 @@
 
 class GameState;
 
-class InputHandler
-{
-public:
-    void ProcessInput(GameState &gameState);
+class InputHandler {
+ public:
+  void ProcessInput(GameState& gameState);
 };

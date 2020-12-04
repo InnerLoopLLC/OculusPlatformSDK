@@ -1,4 +1,4 @@
-// Copyright 2016 Oculus VR, LLC All Rights reserved.
+// Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
 #pragma once
 
@@ -6,63 +6,54 @@
 #include "Blueprint/UserWidget.h"
 #include "OSSAchievementWidget.generated.h"
 
-
-
 UCLASS()
-class OCULUSPLATFORMSAMPLE_API UOSSAchievementWidget : public UUserWidget
-{
-	GENERATED_BODY()
-	
-	
-private:
+class OCULUSPLATFORMSAMPLE_API UOSSAchievementWidget : public UUserWidget {
+  GENERATED_BODY()
 
+ private:
+ public:
+  UOSSAchievementWidget(const FObjectInitializer& ObjectInitializer)
+      : UUserWidget(ObjectInitializer) {
+    if (IsRunningCommandlet()) {
+      FModuleManager::Get().LoadModule(TEXT("OnlineSubsystem"));
+    }
+  }
 
-public:
+  UFUNCTION(BlueprintCallable, Category = Achievement)
+  void ReadAchievements();
 
-	UOSSAchievementWidget(const FObjectInitializer& ObjectInitializer) :
-		UUserWidget(ObjectInitializer)
-	{
-		if (IsRunningCommandlet())
-		{
-			FModuleManager::Get().LoadModule(TEXT("OnlineSubsystem"));
-		}
+  UFUNCTION(BlueprintCallable, Category = Achievement)
+  void ShowAchievementInfo(const FString& AchievementName);
 
-	}
+  UFUNCTION(BlueprintImplementableEvent, Category = Achievement)
+  void OnAchievementsUpdated(const FString& AchStatus);
 
-	UFUNCTION(BlueprintCallable, Category = Achievement)
-		void ReadAchievements();
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
+  FString AchievementStatusText;
 
-	UFUNCTION(BlueprintCallable, Category = Achievement)
-		void ShowAchievementInfo(const FString& AchievementName);
+  UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
+  void AddAchievementToList(const FString& AchievementName);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = Achievement)
-		void OnAchievementsUpdated(const FString& AchStatus);
+  UFUNCTION(BlueprintCallable, Category = Achievement)
+  void UnlockAchievement(const FString& AchievementName);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
-		FString AchievementStatusText;
+  void OnQueryAchievementDescriptionsComplete(
+      const FUniqueNetId& PlayerId,
+      const bool bWasSuccessful);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
-		void AddAchievementToList(const FString& AchievementName);
+  void OnQueryAchievementsComplete(const FUniqueNetId& PlayerId, const bool bWasSuccessful);
 
-	UFUNCTION(BlueprintCallable, Category = Achievement)
-		void UnlockAchievement(const FString& AchievementName);
+  void OnAchievementsWritten(const FUniqueNetId& PlayerId, const bool bWasSuccessful);
 
-	void OnQueryAchievementDescriptionsComplete(const FUniqueNetId& PlayerId, const bool bWasSuccessful);
+  UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
+  void OnAchievementsWrittenBP();
 
-	void OnQueryAchievementsComplete(const FUniqueNetId& PlayerId, const bool bWasSuccessful);
+  UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
+  void OnQueryAchievementsCompleteBP();
 
-	void OnAchievementsWritten(const FUniqueNetId& PlayerId, const bool bWasSuccessful);
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
+  FString AchievementProgressText;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
-		void OnAchievementsWrittenBP();
-
-	UFUNCTION(BlueprintImplementableEvent, Category = OculusSession)
-		void OnQueryAchievementsCompleteBP();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
-		FString AchievementProgressText;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
-		FString AchievementNameText;
-	
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Achievement)
+  FString AchievementNameText;
 };

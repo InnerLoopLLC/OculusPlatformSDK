@@ -2,9 +2,8 @@
 
 class GameState;
 
-class RandomGame
-{
-public:
+class RandomGame {
+ public:
   RandomGame() = default;
   ~RandomGame() = default;
 

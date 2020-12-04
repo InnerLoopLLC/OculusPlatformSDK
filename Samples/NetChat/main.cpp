@@ -14,20 +14,18 @@
 #include "NetChat.h"
 
 int main(int argc, char** argv) {
+  if (argc < 2) {
+    fprintf(stderr, "usage: NetChat.exe <appID>");
+    exit(1);
+  }
 
-	if (argc < 2) {
-		fprintf(stderr, "usage: NetChat.exe <appID>");
-		exit(1);
-	}
+  NetChat oApp;
 
-	NetChat oApp;
+  if (oApp.init(argv[1]) != 0) {
+    fprintf(stderr, "Could not initialize the Oculus Platform\n");
+    return 1;
+  }
+  oApp.mainLoop();
 
-	if (oApp.init(argv[1]) != 0)
-	{
-		fprintf(stderr, "Could not initialize the Oculus Platform\n");
-		return 1;
-	}
-	oApp.mainLoop();
-
-	return 0;
+  return 0;
 }

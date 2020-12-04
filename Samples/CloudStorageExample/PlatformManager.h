@@ -7,13 +7,13 @@
 class GameState;
 
 class PlatformManager {
-public:
+ public:
   PlatformManager();
   ~PlatformManager() = default;
 
   void Tick(GameState& gameState);
 
-private:
+ private:
   void ProcessMessageCheckEntitlement(ovrMessageHandle message, GameState& gameState);
 
   CloudStorageManager CloudStorage;

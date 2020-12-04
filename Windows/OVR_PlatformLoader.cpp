@@ -3,7 +3,7 @@
 Filename    :   OVR_PlatformLoader.cpp
 Content     :   Platform DLL user library
 Created     :   February 18, 2016
-Copyright   :   Copyright 2016 Oculus VR, LLC All Rights reserved.
+Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
 Licensed under the Oculus VR Rift SDK License Version 3.2 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
