@@ -23,6 +23,7 @@
 #include "OVR_CloudStorageMetadata.h"
 #include "OVR_CloudStorageMetadataArray.h"
 #include "OVR_CloudStorageUpdateResponse.h"
+#include "OVR_DestinationArray.h"
 #include "OVR_Error.h"
 #include "OVR_HttpTransferUpdate.h"
 #include "OVR_InstalledApplicationArray.h"
@@ -92,6 +93,7 @@ OVRP_PUBLIC_FUNCTION(ovrCloudStorageDataHandle)                ovr_Message_GetCl
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataHandle)            ovr_Message_GetCloudStorageMetadata(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataArrayHandle)       ovr_Message_GetCloudStorageMetadataArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageUpdateResponseHandle)      ovr_Message_GetCloudStorageUpdateResponse(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrDestinationArrayHandle)                ovr_Message_GetDestinationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrErrorHandle)                           ovr_Message_GetError(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrHttpTransferUpdateHandle)              ovr_Message_GetHttpTransferUpdate(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrInstalledApplicationArrayHandle)       ovr_Message_GetInstalledApplicationArray(const ovrMessageHandle obj);

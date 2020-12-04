@@ -91,6 +91,8 @@ typedef enum ovrMessageType_ {
   ovrMessage_Notification_MarkAsRead                             = 0x717259E3, ///< Generated in response to ovr_Notification_MarkAsRead()
   ovrMessage_Party_GetCurrent                                    = 0x47933760, ///< Generated in response to ovr_Party_GetCurrent()
   ovrMessage_RichPresence_Clear                                  = 0x57B752B3, ///< Generated in response to ovr_RichPresence_Clear()
+  ovrMessage_RichPresence_GetDestinations                        = 0x586F2D14, ///< Generated in response to ovr_RichPresence_GetDestinations()
+  ovrMessage_RichPresence_GetNextDestinationArrayPage            = 0x67367F45, ///< Generated in response to ovr_RichPresence_GetNextDestinationArrayPage()
   ovrMessage_RichPresence_Set                                    = 0x3C147509, ///< Generated in response to ovr_RichPresence_Set()
   ovrMessage_Room_CreateAndJoinPrivate                           = 0x75D6E377, ///< Generated in response to ovr_Room_CreateAndJoinPrivate()
   ovrMessage_Room_CreateAndJoinPrivate2                          = 0x5A3A6243, ///< Generated in response to ovr_Room_CreateAndJoinPrivate2()

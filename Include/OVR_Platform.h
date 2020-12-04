@@ -34,6 +34,8 @@
 #include "OVR_CloudStorageMetadataArray.h"
 #include "OVR_CloudStorageUpdateResponse.h"
 #include "OVR_DataStore.h"
+#include "OVR_Destination.h"
+#include "OVR_DestinationArray.h"
 #include "OVR_Error.h"
 #include "OVR_HttpTransferUpdate.h"
 #include "OVR_InstalledApplication.h"
