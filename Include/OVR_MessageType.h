@@ -45,6 +45,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_Leaderboard_GetNextEntries                          = 0x4E207CD9, ///< Generated in response to ovr_Leaderboard_GetNextEntries()
   ovrMessage_Leaderboard_GetPreviousEntries                      = 0x4901DAC0, ///< Generated in response to ovr_Leaderboard_GetPreviousEntries()
   ovrMessage_Leaderboard_WriteEntry                              = 0x117FC8FE, ///< Generated in response to ovr_Leaderboard_WriteEntry()
+  ovrMessage_Livestreaming_GetStatus                             = 0x489A6995, ///< Generated in response to ovr_Livestreaming_GetStatus()
   ovrMessage_Matchmaking_Browse                                  = 0x1E6532C8, ///< Generated in response to ovr_Matchmaking_Browse()
   ovrMessage_Matchmaking_Browse2                                 = 0x66429E5B, ///< Generated in response to ovr_Matchmaking_Browse2()
   ovrMessage_Matchmaking_Cancel                                  = 0x206849AF, ///< Generated in response to ovr_Matchmaking_Cancel()
@@ -71,6 +72,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_Room_GetCurrent                                     = 0x09A6A504, ///< Generated in response to ovr_Room_GetCurrent()
   ovrMessage_Room_GetCurrentForUser                              = 0x0E0017E5, ///< Generated in response to ovr_Room_GetCurrentForUser()
   ovrMessage_Room_GetInvitableUsers                              = 0x1E325792, ///< Generated in response to ovr_Room_GetInvitableUsers()
+  ovrMessage_Room_GetInvitableUsers2                             = 0x4F53E8B0, ///< Generated in response to ovr_Room_GetInvitableUsers2()
   ovrMessage_Room_GetModeratedRooms                              = 0x0983FD77, ///< Generated in response to ovr_Room_GetModeratedRooms()
   ovrMessage_Room_GetNextRoomArrayPage                           = 0x4E8379C6, ///< Generated in response to ovr_Room_GetNextRoomArrayPage()
   ovrMessage_Room_InviteUser                                     = 0x4129EC13, ///< Generated in response to ovr_Room_InviteUser()
@@ -92,12 +94,12 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
 
+  /// Sent to indicate that more data has been read or an error occured.
+  ovrMessage_Notification_HTTP_Transfer = 0x7DD46E2F,
+
   /// Indicates that a match has been found, for example after calling
   /// ovr_Matchmaking_Enqueue(). Use ovr_Message_GetRoom() to extract the
   /// matchmaking room.
-  ///
-  /// The message will contain a payload of type ::ovrMatchmakingNotificationHandle.
-  /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingNotification().
   ovrMessage_Notification_Matchmaking_MatchFound = 0x0BC3FCD7,
 
   /// Indicates that a connection has been established or there's been an error.

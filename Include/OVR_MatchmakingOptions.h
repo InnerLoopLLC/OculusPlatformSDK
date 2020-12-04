@@ -8,11 +8,14 @@
 #include <stdbool.h>
 #include <OVR_Types.h>
 
+#include "OVR_RoomJoinPolicy.h"
+
 struct ovrMatchmakingOptions;
 typedef struct ovrMatchmakingOptions* ovrMatchmakingOptionsHandle;
 
 OVRP_PUBLIC_FUNCTION(ovrMatchmakingOptionsHandle) ovr_MatchmakingOptions_Create();
 OVRP_PUBLIC_FUNCTION(void) ovr_MatchmakingOptions_Destroy(ovrMatchmakingOptionsHandle handle);
+OVRP_PUBLIC_FUNCTION(void) ovr_MatchmakingOptions_SetCreateRoomJoinPolicy(ovrMatchmakingOptionsHandle handle, ovrRoomJoinPolicy value);
 OVRP_PUBLIC_FUNCTION(void) ovr_MatchmakingOptions_SetCreateRoomMaxUsers(ovrMatchmakingOptionsHandle handle, unsigned int value);
 OVRP_PUBLIC_FUNCTION(void) ovr_MatchmakingOptions_AddEnqueueAdditionalUser(ovrMatchmakingOptionsHandle handle, ovrID value);
 OVRP_PUBLIC_FUNCTION(void) ovr_MatchmakingOptions_ClearEnqueueAdditionalUsers(ovrMatchmakingOptionsHandle handle);

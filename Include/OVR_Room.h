@@ -15,6 +15,10 @@
 
 typedef struct ovrRoom *ovrRoomHandle;
 
+/// A list of users that have been invited to the room, but have not joined the
+/// room yet.
+OVRP_PUBLIC_FUNCTION(ovrUserArrayHandle) ovr_Room_GetInvitedUsers(const ovrRoomHandle obj);
+
 OVRP_PUBLIC_FUNCTION(ovrID)              ovr_Room_GetApplicationID(const ovrRoomHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrDataStoreHandle) ovr_Room_GetDataStore(const ovrRoomHandle obj);
 OVRP_PUBLIC_FUNCTION(const char *)       ovr_Room_GetDescription(const ovrRoomHandle obj);

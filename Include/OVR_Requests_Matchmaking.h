@@ -171,10 +171,10 @@
 /// player. For example, if a player is enqueued with the following:
 ///
 ///   data settings: "map" = "capture_the_flag"
-///   query: their <map> = my <map>
+///   query: their map = my map
 ///
 /// Then the matchmaking service will apply this query to potential match candidates:
-///   their <map> = "capture_the_flag"
+///   their map = "capture_the_flag"
 ///
 /// And therefore find a match with other enqueued players who have also provided
 /// "map"="capture_the_flag" in their Data Settings.
@@ -306,6 +306,7 @@
 /// These options are relevant to CreateRoom2 and CreateAndEnqueueRoom2.
 ///
 /// ovr_MatchmakingOptions_SetCreateRoomMaxUsers - Overrides the value of "Max Users" in pool settings of the Developer Dashboard.
+/// ovr_MatchmakingOptions_SetCreateRoomJoinPolicy - Specifies a join policy for the created room. If unset, the join policy defaults to EVERYONE.
 ///
 /// ## Enqueue-specific Options
 ///
@@ -332,6 +333,8 @@
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Browse(const char *pool, ovrMatchmakingCustomQueryData *customQueryData);
 
 /// Modes: BROWSE
+/// 
+/// See overview documentation above.
 /// 
 /// Return a list of matchmaking rooms in the current pool filtered by skill
 /// and ping (if enabled). This also enqueues the user in the matchmaking
@@ -364,13 +367,14 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Browse2(const char *pool, ovrMa
 /// This response has no payload. If no error occured, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Cancel(const char *pool, const char *requestHash);
 
-/// Modes: BOUT, BROWSE, ROOM
+/// Modes: QUICKMATCH, BROWSE
 /// 
 /// Makes a best effort to cancel a previous Enqueue request before a match
-/// occurs. Typically triggered when a user gives up waiting, or, for BROWSE
-/// mode, when the host of a room wants to begin the game. If you don't cancel
-/// but the user goes offline, the user/room will be timed out of the queue
-/// within 30 seconds.
+/// occurs. Typically triggered when a user gives up waiting. For BROWSE mode,
+/// call this when a user gives up looking through the room list or when the
+/// host of a room wants to stop receiving new users. If you don't cancel but
+/// the user goes offline, the user/room will be timed out of the queue within
+/// 30 seconds.
 ///
 /// A message with type ::ovrMessage_Matchmaking_Cancel2 will be generated in response.
 ///
@@ -393,7 +397,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Cancel2();
 /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingEnqueueResultAndRoom().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_CreateAndEnqueueRoom(const char *pool, unsigned int maxUsers, bool subscribeToUpdates, ovrMatchmakingCustomQueryData *customQueryData);
 
-/// Modes: BROWSE, ROOM
+/// Modes: BROWSE, QUICKMATCH (Advanced; Can Users Create Rooms = true)
 /// 
 /// See overview documentation above.
 /// 
@@ -431,6 +435,12 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_CreateRoom(const char *pool, un
 /// creation, you can call EnqueueRoom2. However, Oculus recommends using
 /// CreateAndEnqueueRoom2 instead.
 /// 
+/// Modes: BROWSE, QUICKMATCH (Advanced; Can Users Create Rooms = true)
+/// 
+/// Create a matchmaking room and join it, but do not enqueue the room. After
+/// creation, you can call EnqueueRoom. Consider using CreateAndEnqueueRoom
+/// instead.
+/// 
 /// Visit https://developer2.oculus.com/application/[YOUR_APP_ID]/matchmaking
 /// to set up pools and queries
 /// \param pool The matchmaking pool to use, which is defined for the app.
@@ -456,7 +466,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_CreateRoom2(const char *pool, o
 /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingEnqueueResult().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Enqueue(const char *pool, ovrMatchmakingCustomQueryData *customQueryData);
 
-/// Modes: BOUT, ROOM (User only)
+/// Modes: QUICKMATCH
 /// 
 /// See overview documentation above.
 /// 
@@ -511,6 +521,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_EnqueueRoom(ovrID roomID, ovrMa
 /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingEnqueueResult().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_EnqueueRoom2(ovrID roomID, ovrMatchmakingOptionsHandle matchmakingOptions);
 
+/// Modes: QUICKMATCH, BROWSE
+/// 
 /// Used to debug the state of the current matchmaking pool queue. This is not
 /// intended to be used in production.
 ///
@@ -522,6 +534,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_EnqueueRoom2(ovrID roomID, ovrM
 /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingAdminSnapshot().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_GetAdminSnapshot();
 
+/// Modes: QUICKMATCH, BROWSE
+/// 
 /// Gets the matchmaking stats for the current user
 /// 
 /// Given a pool it will look up the current user's wins, loss, draws and skill
@@ -539,7 +553,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_GetAdminSnapshot();
 /// Extract the payload from the message handle with ::ovr_Message_GetMatchmakingStats().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_GetStats(const char *pool, unsigned int maxLevel, ovrMatchmakingStatApproach approach);
 
-/// Modes: BOUT, BROWSE, ROOM
+/// Modes: QUICKMATCH, BROWSE
 /// 
 /// Joins a room returned by a previous call to ovr_Matchmaking_Enqueue or
 /// ovr_Matchmaking_Browse.
@@ -554,7 +568,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_GetStats(const char *pool, unsi
 /// Extract the payload from the message handle with ::ovr_Message_GetRoom().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_JoinRoom(ovrID roomID, bool subscribeToUpdates);
 
-/// Modes: BOUT, BROWSE, ROOM
+/// Modes: QUICKMATCH, BROWSE (+ Skill Pool)
 /// 
 /// See the overview documentation above.
 /// 
@@ -571,7 +585,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_JoinRoom(ovrID roomID, bool sub
 /// This response has no payload. If no error occured, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_ReportResultInsecure(ovrID roomID, ovrKeyValuePair *data, unsigned int numItems);
 
-/// Modes: BOUT, BROWSE, ROOM
+/// Modes: QUICKMATCH, BROWSE (+ Skill Pool)
 /// 
 /// For pools with skill-based matching. See overview documentation above.
 /// 

@@ -5,6 +5,7 @@
 #include <string.h>
 #include <fstream>
 #include <iostream>
+#include <inttypes.h>
 
 #include "OVR_Platform.h"
 #include "OVR_Functions_Networking.h"
@@ -22,6 +23,9 @@ int NetChat::init(const char* appID)
 	ovr_Entitlement_GetIsViewerEntitled();
 
 	printf("Press h for list of commands.\nCommand > ");
+
+    printf("User locale is %s\n", ovr_GetLoggedInUserLocale());
+    printf("User ID is %" PRId64 "\n", ovr_GetLoggedInUserID());
 
 	// Get the currently logged in user to get our user ID.
 	ovrRequest req;

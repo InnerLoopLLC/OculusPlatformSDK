@@ -52,6 +52,7 @@
 #include "OVR_Requests_Entitlement.h"
 #include "OVR_Requests_IAP.h"
 #include "OVR_Requests_Leaderboard.h"
+#include "OVR_Requests_Livestreaming.h"
 #include "OVR_Requests_Matchmaking.h"
 #include "OVR_Requests_Notification.h"
 #include "OVR_Requests_Party.h"
@@ -59,6 +60,7 @@
 #include "OVR_Requests_User.h"
 #include "OVR_Requests_Voip.h"
 #include "OVR_MatchmakingOptions.h"
+#include "OVR_RoomOptions.h"
 #include "OVR_Functions_ApplicationLifecycle.h"
 #include "OVR_Functions_Networking.h"
 #include "OVR_Functions_Voip.h"
@@ -95,9 +97,15 @@ OVRPL_PUBLIC_FUNCTION(ovrPlatformInitializeResult) ovr_PlatformInitializeWindows
 
 #endif
 
-/// Returns the id of the currently logged in user, or a 0 id of there
+/// Returns the id of the currently logged in user, or a 0 id if there
 /// is none.
 OVRP_PUBLIC_FUNCTION(ovrID) ovr_GetLoggedInUserID();
+
+/// Returns the currently logged-in user's locale as a string, or empty string on error.
+/// Return value format conforms to BCP47: https://tools.ietf.org/html/bcp47
+/// The return value is borrowed, and should not be freed
+OVRP_PUBLIC_FUNCTION(const char*) ovr_GetLoggedInUserLocale();
+
 
 /// Return the next message in the queue (FIFO order), or null if none
 /// is available.  Safe to call on any thread.  Each returned message

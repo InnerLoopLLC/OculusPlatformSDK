@@ -106,6 +106,9 @@ extern LogFunctionPtr DoLogging;
 ///
 typedef void(*VoipFilterCallback)(int16_t pcmData[], size_t pcmDataLength, int frequency, int numChannels);
 
+/// Callback used by the ovrMicrophone class to signal that data is available
+///
+typedef void(*MicrophoneDataAvailableCallback)(void *);
 
 #ifdef __cplusplus
 }

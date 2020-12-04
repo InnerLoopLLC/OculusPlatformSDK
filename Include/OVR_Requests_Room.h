@@ -9,6 +9,7 @@
 #include "OVR_RoomArray.h"
 #include "OVR_RoomJoinPolicy.h"
 #include "OVR_RoomMembershipLockStatus.h"
+#include "OVR_RoomOptions.h"
 #include <stdbool.h>
 
 /// \file
@@ -187,6 +188,19 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetCurrentForUser(ovrID userID);
 /// Extract the payload from the message handle with ::ovr_Message_GetUserArray().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetInvitableUsers();
 
+/// Loads a list of users you can invite to your current room. These are pulled
+/// from your friends list and filtered for relevance and interest. If your
+/// current room cannot be joined, this list will be empty.
+/// \param roomOptions Additional configuration for this request. Optional.
+///
+/// A message with type ::ovrMessage_Room_GetInvitableUsers2 will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrUserArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetUserArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetInvitableUsers2(ovrRoomOptionsHandle roomOptions);
+
 /// Fetches the list of moderated rooms created for the application.
 ///
 /// A message with type ::ovrMessage_Room_GetModeratedRooms will be generated in response.
@@ -209,7 +223,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetNextRoomArrayPage(ovrRoomArrayHandl
 
 /// Invites a user to the specified room.
 /// \param roomID The ID of your current room.
-/// \param inviteToken A user's invite token, returned by ovr_Room_GetInvitableUsers.
+/// \param inviteToken A user's invite token, returned by ovr_Room_GetInvitableUsers().
 ///
 /// A message with type ::ovrMessage_Room_InviteUser will be generated in response.
 ///
