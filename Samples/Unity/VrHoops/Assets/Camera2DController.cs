@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 // Helper class to attach to the MainCamera so it can be moved with the mouse while debugging
 // in 2D mode on a PC.

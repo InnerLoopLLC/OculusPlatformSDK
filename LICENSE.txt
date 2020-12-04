@@ -1,6 +1,6 @@
-ï»¿Oculus VR, LLC Software Development Kit License Agreement
+Oculus VR, LLC Software Development Kit License Agreement
 
-Copyright Â© 2014-2016 Oculus VR, LLC All rights reserved.
+Copyright © 2014-2016 Oculus VR, LLC All rights reserved.
 
 The text of this may be found at: https://developer3.oculus.com/licenses/sdk-3.4.1/
 
@@ -75,7 +75,7 @@ licensed, or sublicensed to interface with software or hardware or other commerc
 headsets, mobile tablets or phones that are not authorized and approved by Oculus;
 
 2.2 You must include with all such redistributed or sublicensed Oculus SDK code 
-the following copyright notice: "Copyright Â© 2014-2016 Oculus VR, LLC. All rights reserved,"
+the following copyright notice: "Copyright © 2014-2016 Oculus VR, LLC. All rights reserved,"
 
 2.3 You must give any other recipients of the Oculus SDK a copy of this License as such 
 recipients, licensees or sublicensees may only use the Oculus SDK subject to the terms 
@@ -93,20 +93,20 @@ not to use any API, code or other tools, instruction or service provided by Ocul
 or use a Platform Service other than in compliance with these terms. For more information go 
 to https://developer.oculus.com.
 
-â€¢ "Oculus Platform Framework" means the suite of Oculus platform services, including but not 
+• "Oculus Platform Framework" means the suite of Oculus platform services, including but not 
   limited to the Oculus file distribution and update system (enabling distribution and updates 
   of Developer Content by Oculus, including through generated activation Keys), entitlement 
   system, and account authentication, which list may be changed from time to time in Oculus' 
   sole discretion.
-â€¢ "Application Services" means services provided by Oculus associated with the Platform, 
+• "Application Services" means services provided by Oculus associated with the Platform, 
   including but not limited to in-app purchasing, multiplayer matchmaking, friends, leader boards, 
   achievements, rooms, voice over IP and cloud saves, which list may be changed from time to time 
   in Oculus' sole discretion.
-â€¢ "Platform" means the Oculus virtual reality platform, including but not limited to the user 
+• "Platform" means the Oculus virtual reality platform, including but not limited to the user 
   experience, user interface, store, and social features, usable on Oculus approved hardware or 
   any third-party device or operating system, including but not limited to iOS, Android, Windows, 
   OS X, Linux, and Windows Mobile.
-â€¢ "Platform Services" means the Oculus Platform Framework and the Application Services.
+• "Platform Services" means the Oculus Platform Framework and the Application Services.
 
 3.1 Oculus Platform Services. Oculus makes certain Platform Services available to you to include and 
 enable in your Developer Content. Developer Content that enables or includes any Platform Service 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 
 // This script moves to goal around in a random direction to add a bit more difficulty

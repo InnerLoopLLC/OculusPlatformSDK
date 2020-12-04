@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 // Uses two triggers to detect that a basket is made by traveling from top to bottom

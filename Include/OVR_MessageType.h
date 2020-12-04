@@ -56,6 +56,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_IAP_GetProductsBySKU                                = 0x7E9ACAF5, ///< Generated in response to ovr_IAP_GetProductsBySKU()
   ovrMessage_IAP_GetViewerPurchases                              = 0x3A0F8419, ///< Generated in response to ovr_IAP_GetViewerPurchases()
   ovrMessage_IAP_LaunchCheckoutFlow                              = 0x3F9B0D0D, ///< Generated in response to ovr_IAP_LaunchCheckoutFlow()
+  ovrMessage_LanguagePack_GetCurrent                             = 0x1F90F0D5, ///< Generated in response to ovr_LanguagePack_GetCurrent()
   ovrMessage_Leaderboard_GetEntries                              = 0x5DB3474C, ///< Generated in response to ovr_Leaderboard_GetEntries()
   ovrMessage_Leaderboard_GetEntriesAfterRank                     = 0x18378BEF, ///< Generated in response to ovr_Leaderboard_GetEntriesAfterRank()
   ovrMessage_Leaderboard_GetNextEntries                          = 0x4E207CD9, ///< Generated in response to ovr_Leaderboard_GetNextEntries()
@@ -117,6 +118,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetOrgScopedID                                 = 0x18F0B01B, ///< Generated in response to ovr_User_GetOrgScopedID()
   ovrMessage_User_GetSdkAccounts                                 = 0x67526A83, ///< Generated in response to ovr_User_GetSdkAccounts()
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
+  ovrMessage_User_LaunchFriendRequestFlow                        = 0x0904B598, ///< Generated in response to ovr_User_LaunchFriendRequestFlow()
   ovrMessage_User_LaunchProfile                                  = 0x0A397297, ///< Generated in response to ovr_User_LaunchProfile()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
 

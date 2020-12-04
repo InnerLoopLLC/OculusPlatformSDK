@@ -23,6 +23,9 @@
 #include "OVR_Error.h"
 #include "OVR_HttpTransferUpdate.h"
 #include "OVR_InstalledApplicationArray.h"
+#include "OVR_LaunchBlockFlowResult.h"
+#include "OVR_LaunchFriendRequestFlowResult.h"
+#include "OVR_LaunchUnblockFlowResult.h"
 #include "OVR_LeaderboardEntryArray.h"
 #include "OVR_LeaderboardUpdateStatus.h"
 #include "OVR_LinkedAccountArray.h"
@@ -84,6 +87,9 @@ OVRP_PUBLIC_FUNCTION(ovrCloudStorageUpdateResponseHandle)      ovr_Message_GetCl
 OVRP_PUBLIC_FUNCTION(ovrErrorHandle)                           ovr_Message_GetError(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrHttpTransferUpdateHandle)              ovr_Message_GetHttpTransferUpdate(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrInstalledApplicationArrayHandle)       ovr_Message_GetInstalledApplicationArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrLaunchBlockFlowResultHandle)           ovr_Message_GetLaunchBlockFlowResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrLaunchFriendRequestFlowResultHandle)   ovr_Message_GetLaunchFriendRequestFlowResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrLaunchUnblockFlowResultHandle)         ovr_Message_GetLaunchUnblockFlowResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLeaderboardEntryArrayHandle)           ovr_Message_GetLeaderboardEntryArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLeaderboardUpdateStatusHandle)         ovr_Message_GetLeaderboardUpdateStatus(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLinkedAccountArrayHandle)              ovr_Message_GetLinkedAccountArray(const ovrMessageHandle obj);

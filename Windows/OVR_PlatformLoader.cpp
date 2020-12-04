@@ -549,7 +549,6 @@ OVRPL_DECLARE_IMPORT(ovrPlatformInitializeResult, ovr_PlatformInitializeWindows,
 OVRPL_DECLARE_IMPORT(ovrRequest, ovr_PlatformInitializeWindowsAsynchronous, (const char *appId));
 OVRPL_DECLARE_IMPORT(ovrRequest, ovr_PlatformInitializeWithAccessToken, (ovrID appId, const char *accessToken));
 OVRPL_DECLARE_IMPORT(ovrMessage*, ovr_PopMessage, ());
-OVRPL_DECLARE_IMPORT(bool, ovr_IsEntitled, ());
 OVRPL_DECLARE_IMPORT(void, ovr_PlatformInitializeStandaloneAccessToken, (const char *accessToken));
 OVRPL_DECLARE_IMPORT(ovrRequest, ovr_Platform_InitializeStandaloneOculus, (const ovrOculusInitParams *params));
 
@@ -558,7 +557,6 @@ static void LoadFunctions(ModuleHandleType hModule) {
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeWindowsAsynchronous);
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeWithAccessToken)
     OVRPL_GETFUNCTION(hModule, ovr_PopMessage);
-    OVRPL_GETFUNCTION(hModule, ovr_IsEntitled);
     OVRPL_GETFUNCTION(hModule, ovr_PlatformInitializeStandaloneAccessToken);
     OVRPL_GETFUNCTION(hModule, ovr_Platform_InitializeStandaloneOculus);
 }
@@ -637,13 +635,6 @@ OVRPL_PUBLIC_FUNCTION(ovrMessage*) ovr_PopMessage() {
         return ovr_PopMessagePLPtr();
     }
     return nullptr;
-}
-
-OVRPL_PUBLIC_FUNCTION(bool) ovr_IsEntitled() {
-    if (InitializeResult == ovrPlatformInitialize_Success) {
-        return ovr_IsEntitledPLPtr();
-    }
-    return false;
 }
 
 // We also shim the standalone initializer just for consistency in debugging, basically a shorter version of the windows init since we don't care about safety

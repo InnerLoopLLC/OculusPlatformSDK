@@ -1,4 +1,4 @@
-﻿using Oculus.Platform.Models;
+using Oculus.Platform.Models;
 
 public class RemotePlayer : Player
 {
