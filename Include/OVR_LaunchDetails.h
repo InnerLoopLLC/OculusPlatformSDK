@@ -25,10 +25,6 @@ OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetLaunchSource(const ovrLa
 /// If provided, the intended room the user would like to be in
 OVRP_PUBLIC_FUNCTION(ovrID) ovr_LaunchDetails_GetRoomID(const ovrLaunchDetailsHandle obj);
 
-/// A unique identifer to keep track of a user going through the deeplinking
-/// flow
-OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetTrackingID(const ovrLaunchDetailsHandle obj);
-
 /// If provided, the intended users the user would like to be with
 /// This method may return null. This indicates that the value is not present or that the curent
 /// app or user is not permitted to access it.

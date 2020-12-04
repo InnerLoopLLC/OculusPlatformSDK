@@ -14,8 +14,6 @@ typedef struct ovrApplicationOptions* ovrApplicationOptionsHandle;
 
 OVRP_PUBLIC_FUNCTION(ovrApplicationOptionsHandle) ovr_ApplicationOptions_Create();
 OVRP_PUBLIC_FUNCTION(void) ovr_ApplicationOptions_Destroy(ovrApplicationOptionsHandle handle);
-/// A message to be passed to a launched app, which can be retrieved with
-/// ovr_LaunchDetails_GetDeeplinkMessage()
 OVRP_PUBLIC_FUNCTION(void) ovr_ApplicationOptions_SetDeeplinkMessage(ovrApplicationOptionsHandle handle, const char * value);
 
 #endif

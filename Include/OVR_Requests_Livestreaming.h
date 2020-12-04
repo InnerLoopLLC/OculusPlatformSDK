@@ -49,15 +49,6 @@
 /// Extract the payload from the message handle with ::ovr_Message_GetLivestreamingStatus().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Livestreaming_GetStatus();
 
-/// Launch the Livestreaming Flow.
-///
-/// A message with type ::ovrMessage_Livestreaming_LaunchLivestreamingFlow will be generated in response.
-///
-/// First call ::ovr_Message_IsError() to check if an error occurred.
-///
-/// This response has no payload. If no error occured, the request was successful. Yay!
-OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Livestreaming_LaunchLivestreamingFlow();
-
 /// Pauses the livestreaming session if there is one. NOTE: this function is
 /// safe to call if no session is active.
 ///
