@@ -95,12 +95,12 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetLoggedInUserFriendsAndRooms();
 /// Customization can be done via UserOptions. Create this object with
 /// ovr_UserOptions_Create. The params that could be used are:
 ///
-/// 1. TimeWindow - how recently should the users have played? The default is
-/// ovrTimeWindow_ThirtyDays.
+/// 1. ovr_UserOptions_SetTimeWindow - how recently should the users have
+/// played? The default is ovrTimeWindow_ThirtyDays.
 ///
-/// 2. MaxUsers - we will limit the number of results returned. By default, the
-/// number is unlimited, but the server may choose to limit results for
-/// performance reasons.
+/// 2. ovr_UserOptions_SetMaxUsers - we will limit the number of results
+/// returned. By default, the number is unlimited, but the server may choose to
+/// limit results for performance reasons.
 /// \param userOptions Additional configuration for this request. Optional.
 ///
 /// A message with type ::ovrMessage_User_GetLoggedInUserRecentlyMetUsersAndRooms will be generated in response.

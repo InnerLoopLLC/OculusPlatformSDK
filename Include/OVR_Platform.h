@@ -67,6 +67,7 @@
 #include "OVR_RoomInviteNotificationArray.h"
 #include "OVR_SdkAccount.h"
 #include "OVR_SdkAccountArray.h"
+#include "OVR_ShareMediaResult.h"
 #include "OVR_SystemPermission.h"
 #include "OVR_SystemVoipState.h"
 #include "OVR_User.h"
@@ -74,6 +75,7 @@
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
 #include "OVR_UserProof.h"
+#include "OVR_UserReportID.h"
 #include "OVR_VoipDecoder.h"
 #include "OVR_VoipEncoder.h"
 
@@ -86,6 +88,7 @@
 #include "OVR_Requests_Leaderboard.h"
 #include "OVR_Requests_Livestreaming.h"
 #include "OVR_Requests_Matchmaking.h"
+#include "OVR_Requests_Media.h"
 #include "OVR_Requests_Notification.h"
 #include "OVR_Requests_Party.h"
 #include "OVR_Requests_Room.h"

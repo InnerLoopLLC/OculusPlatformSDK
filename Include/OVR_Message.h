@@ -44,6 +44,7 @@
 #include "OVR_RoomInviteNotification.h"
 #include "OVR_RoomInviteNotificationArray.h"
 #include "OVR_SdkAccountArray.h"
+#include "OVR_ShareMediaResult.h"
 #include "OVR_SystemPermission.h"
 #include "OVR_SystemVoipState.h"
 #include "OVR_Types.h"
@@ -51,6 +52,7 @@
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
 #include "OVR_UserProof.h"
+#include "OVR_UserReportID.h"
 #include <stdbool.h>
 
 typedef struct ovrMessage *ovrMessageHandle;
@@ -96,6 +98,7 @@ OVRP_PUBLIC_FUNCTION(ovrRoomArrayHandle)                       ovr_Message_GetRo
 OVRP_PUBLIC_FUNCTION(ovrRoomInviteNotificationHandle)          ovr_Message_GetRoomInviteNotification(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRoomInviteNotificationArrayHandle)     ovr_Message_GetRoomInviteNotificationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSdkAccountArrayHandle)                 ovr_Message_GetSdkAccountArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrShareMediaResultHandle)                ovr_Message_GetShareMediaResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(const char *)                             ovr_Message_GetString(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSystemPermissionHandle)                ovr_Message_GetSystemPermission(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSystemVoipStateHandle)                 ovr_Message_GetSystemVoipState(const ovrMessageHandle obj);
@@ -104,6 +107,7 @@ OVRP_PUBLIC_FUNCTION(ovrUserHandle)                            ovr_Message_GetUs
 OVRP_PUBLIC_FUNCTION(ovrUserAndRoomArrayHandle)                ovr_Message_GetUserAndRoomArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserArrayHandle)                       ovr_Message_GetUserArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserProofHandle)                       ovr_Message_GetUserProof(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrUserReportIDHandle)                    ovr_Message_GetUserReportID(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(bool)                                     ovr_Message_IsError(const ovrMessageHandle obj);
 
 #endif
