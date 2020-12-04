@@ -54,16 +54,20 @@ void FOnlineSubsystemOculusModule::StartupModule()
 	OculusFactory = new FOnlineFactoryOculus();
 
 	// Create and register our singleton factory with the main online subsystem for easy access
-	FOnlineSubsystemModule& OSS = FModuleManager::GetModuleChecked<FOnlineSubsystemModule>("OnlineSubsystem");
-	OSS.RegisterPlatformService(OCULUS_SUBSYSTEM, OculusFactory);
+	FOnlineSubsystemModule* OSS = FModuleManager::GetModulePtr<FOnlineSubsystemModule>("OnlineSubsystem");
+  if (OSS) {
+    OSS->RegisterPlatformService(OCULUS_SUBSYSTEM, OculusFactory);
+  }
 }
 
 void FOnlineSubsystemOculusModule::ShutdownModule()
 {
 	UE_LOG_ONLINE(Log, TEXT("Oculus Shutdown!"));
 
-	FOnlineSubsystemModule& OSS = FModuleManager::GetModuleChecked<FOnlineSubsystemModule>("OnlineSubsystem");
-	OSS.UnregisterPlatformService(OCULUS_SUBSYSTEM);
+	FOnlineSubsystemModule* OSS = FModuleManager::GetModulePtr<FOnlineSubsystemModule>("OnlineSubsystem");
+  if (OSS) {
+    OSS->UnregisterPlatformService(OCULUS_SUBSYSTEM);
+  }
 	
 	delete OculusFactory;
 	OculusFactory = nullptr;

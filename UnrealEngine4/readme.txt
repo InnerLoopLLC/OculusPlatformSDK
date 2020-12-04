@@ -1,3 +1,12 @@
+Supported UE4 Versions
+-------------
+
+UE4.12
+UE4.11
+UE4.10
+
+NOTE: It is recommended to upgrade to UE4.13+ which will have this plugin already included with the engine.
+
 Installation
 -------------
 
@@ -40,6 +49,17 @@ Configuration
 3) In your <project_name>.Build.cs add OnlineSubsystem (OSS) as a dependency:
 
 	PrivateDependencyModuleNames.Add("OnlineSubsystem");
+  
+4) [UE4.12.5] Before calling any Online or IOnlineSubsystem functions, add the following to your *.cpp
+
+  #include "ModuleManager.h"
+  ...
+  if (IsRunningCommandlet()) 
+  {
+    FModuleManager::Get().LoadModule(TEXT("OnlineSubsystem"));
+  }
+
+This will ensure that the OnlineSubsystem module is loaded when cooking content for windows.
 	
 
 OSS Interfaces Provided
