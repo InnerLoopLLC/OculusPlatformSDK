@@ -37,6 +37,7 @@
 #include "OVR_Room.h"
 #include "OVR_RoomArray.h"
 #include "OVR_RoomInviteNotificationArray.h"
+#include "OVR_SystemPermission.h"
 #include "OVR_SystemVoipState.h"
 #include "OVR_Types.h"
 #include "OVR_User.h"
@@ -83,6 +84,7 @@ OVRP_PUBLIC_FUNCTION(ovrRoomHandle)                            ovr_Message_GetRo
 OVRP_PUBLIC_FUNCTION(ovrRoomArrayHandle)                       ovr_Message_GetRoomArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRoomInviteNotificationArrayHandle)     ovr_Message_GetRoomInviteNotificationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(const char *)                             ovr_Message_GetString(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrSystemPermissionHandle)                ovr_Message_GetSystemPermission(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSystemVoipStateHandle)                 ovr_Message_GetSystemVoipState(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrMessageType)                           ovr_Message_GetType(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserHandle)                            ovr_Message_GetUser(const ovrMessageHandle obj);
