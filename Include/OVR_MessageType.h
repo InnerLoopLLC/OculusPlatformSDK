@@ -82,6 +82,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_Leaderboard_GetPreviousEntries                      = 0x4901DAC0, ///< Generated in response to ovr_Leaderboard_GetPreviousEntries()
   ovrMessage_Leaderboard_WriteEntry                              = 0x117FC8FE, ///< Generated in response to ovr_Leaderboard_WriteEntry()
   ovrMessage_Livestreaming_GetStatus                             = 0x489A6995, ///< Generated in response to ovr_Livestreaming_GetStatus()
+  ovrMessage_Livestreaming_LaunchLivestreamingFlow               = 0x6AB156BD, ///< Generated in response to ovr_Livestreaming_LaunchLivestreamingFlow()
   ovrMessage_Livestreaming_PauseStream                           = 0x369C7683, ///< Generated in response to ovr_Livestreaming_PauseStream()
   ovrMessage_Livestreaming_ResumeStream                          = 0x22526D8F, ///< Generated in response to ovr_Livestreaming_ResumeStream()
   ovrMessage_Matchmaking_Browse                                  = 0x1E6532C8, ///< Generated in response to ovr_Matchmaking_Browse()
@@ -288,6 +289,12 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrSystemVoipStateHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetSystemVoipState().
   ovrMessage_Notification_Voip_SystemVoipState = 0x58D254A5,
+
+  /// Get surface and update action from platform webrtc for update.
+  ///
+  /// The message will contain a payload of type const char *.
+  /// Extract the payload from the message handle with ::ovr_Message_GetString().
+  ovrMessage_Notification_Vrcamera_GetSurfaceUpdate = 0x37F21084,
 
   ovrMessage_PlatformInitializeWithAccessToken = 0x35692F2B,
   ovrMessage_Platform_InitializeStandaloneOculus = 0x51F8CE0C,
