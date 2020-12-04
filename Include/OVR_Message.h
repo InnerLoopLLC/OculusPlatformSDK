@@ -18,6 +18,9 @@
 #include "OVR_CalApplicationFinalized.h"
 #include "OVR_CalApplicationProposed.h"
 #include "OVR_CalApplicationSuggestionArray.h"
+#include "OVR_Challenge.h"
+#include "OVR_ChallengeArray.h"
+#include "OVR_ChallengeEntryArray.h"
 #include "OVR_CloudStorageConflictMetadata.h"
 #include "OVR_CloudStorageData.h"
 #include "OVR_CloudStorageMetadata.h"
@@ -93,6 +96,9 @@ OVRP_PUBLIC_FUNCTION(ovrAssetFileDownloadUpdateHandle)            ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrCalApplicationFinalizedHandle)            ovr_Message_GetCalApplicationFinalized(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCalApplicationProposedHandle)             ovr_Message_GetCalApplicationProposed(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCalApplicationSuggestionArrayHandle)      ovr_Message_GetCalApplicationSuggestionArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrChallengeHandle)                          ovr_Message_GetChallenge(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrChallengeArrayHandle)                     ovr_Message_GetChallengeArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrChallengeEntryArrayHandle)                ovr_Message_GetChallengeEntryArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageConflictMetadataHandle)       ovr_Message_GetCloudStorageConflictMetadata(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageDataHandle)                   ovr_Message_GetCloudStorageData(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataHandle)               ovr_Message_GetCloudStorageMetadata(const ovrMessageHandle obj);
