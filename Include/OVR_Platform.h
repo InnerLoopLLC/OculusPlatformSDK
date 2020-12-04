@@ -12,7 +12,6 @@
 #include "OVR_Message.h"
 #include "OVR_DataStore.h"
 #include "OVR_Error.h"
-#include "OVR_Networking.h"
 #include "OVR_NetworkingPeer.h"
 #include "OVR_UserProof.h"
 #include "OVR_Platform_Defs.h"
@@ -32,7 +31,6 @@
 #include "OVR_AchievementProgress.h"
 #include "OVR_AchievementProgressArray.h"
 #include "OVR_AchievementUpdate.h"
-#include "OVR_ApplicationLifecycle.h"
 #include "OVR_CloudStorageConflictMetadata.h"
 #include "OVR_CloudStorageData.h"
 #include "OVR_CloudStorageMetadataArray.h"
@@ -56,8 +54,16 @@
 #include "OVR_Requests_Leaderboard.h"
 #include "OVR_Requests_Matchmaking.h"
 #include "OVR_Requests_Notification.h"
+#include "OVR_Requests_Party.h"
 #include "OVR_Requests_Room.h"
 #include "OVR_Requests_User.h"
+#include "OVR_Requests_Voip.h"
+#include "OVR_MatchmakingOptions.h"
+#include "OVR_Functions_ApplicationLifecycle.h"
+#include "OVR_Functions_Networking.h"
+#include "OVR_Functions_Voip.h"
+
+OVRP_PUBLIC_FUNCTION(bool) ovr_IsPlatformInitialized();
 
 #ifdef __ANDROID__
 #include <jni.h>

@@ -7,8 +7,8 @@
 #include <iostream>
 
 #include "OVR_Platform.h"
-#include "OVR_Voip.h"
-#include "OVR_Networking.h"
+#include "OVR_Functions_Voip.h"
+#include "OVR_Functions_Networking.h"
 #include "OVR_NetworkingPeer.h"
 #include "State.h"
 

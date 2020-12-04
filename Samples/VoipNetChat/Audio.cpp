@@ -6,7 +6,7 @@
 #include <chrono>
 
 #include "OVR_Platform.h"
-#include "OVR_Voip.h"
+#include "OVR_Functions_Voip.h"
 #include "State.h"
 #include "Audio.h"
 
@@ -135,6 +135,7 @@ void Audio::pumpOVRMessages()
       break;
 
     case ovrMessage_Matchmaking_Enqueue:
+    case ovrMessage_Matchmaking_Enqueue2:
       currentState.findMatchResponse(message);
       break;
 

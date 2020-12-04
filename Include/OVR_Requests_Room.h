@@ -256,7 +256,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_KickUser(ovrID roomID, ovrID userID, i
 /// This response has no payload. If no error occured, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_LaunchInvitableUserFlow(ovrID roomID);
 
-/// Removes you from your current room.
+/// Removes you from your current room. Returns the solo room you are now in if
+/// it succeeds
 /// \param roomID The room you're currently in.
 ///
 /// A message with type ::ovrMessage_Room_Leave will be generated in response.

@@ -17,6 +17,14 @@ extern "C" {
 /// response to a request, or some new information from the backend.
 typedef uint64_t ovrRequest;
 
+// Represents an RequestID that can used as a default.
+// We guarantee that no valid Request ID will equal invalidRequestID
+const uint64_t invalidRequestID = 0;
+
+// Represents an invalid MessageID that can used as a default.
+// We guarantee that no valid Message ID will equal invalidMessageID
+const uint64_t invalidMessageID = 0;
+
 typedef struct {
   const char *key;
   ovrKeyValuePairType valueType;
