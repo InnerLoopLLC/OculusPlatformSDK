@@ -1,0 +1,19 @@
+{
+	"FileVersion" : 3,
+	
+	"FriendlyName" : "Oculus Platform Plugin",
+	"Version" : 1,
+	"VersionName" : "1.0",
+	"CreatedBy" : "Oculus",
+	"CreatedByURL" : "https://www.oculus.com",
+	"Description" : "The plugin for the Oculus Platform SDK",
+	"Category" : "Oculus",
+	
+	"Modules" :
+	[
+		{
+			"Name" : "OnlineSubsystemOculus",
+			"Type" : "Runtime"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+{
+	"Changelist" : 3013449,
+	"BuildId" : "",
+	"Modules" : 
+	{
+		"OnlineSubsystemOculus" : "UE4Editor-OnlineSubsystemOculus.dll"
+	}
+}
