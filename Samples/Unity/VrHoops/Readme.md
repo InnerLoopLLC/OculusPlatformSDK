@@ -4,6 +4,8 @@ This example uses basic Quickmatch and Peer-to-Peer networking to creating a cro
 Quickmatch is used to find other players for a match and Networking is used to synchronize player
 state such as movement of the balls.
 
+![Screenshot](VrHoops512.png)
+
 # Application Setup
 
 1. Open the Project in Unity 5.4.1p1 or later
@@ -31,6 +33,30 @@ state such as movement of the balls.
 8. Leave Should Consider Ping Time? at the default setting of No
 9. Don't add anything under Data Settings
 10. Click Submit.
+
+# Configure Leaderboards
+
+This sample uses two Leaderboards to track player scores.  One leaderboard tracks the player that has
+won the most games and another tracks who achieved the highest score in a single game.  Setup the leaderboards
+using the following steps:
+
+1. Navigate to your App Grouping section on the Developer Dashboard
+2. Create a new leadername with the API NAME **MOST_MATCHES_WON** and sort order **Higher is Better**
+3. Create a new leadername with the API NAME **HIGHEST_MATCH_SCORE** and sort order **Higher is Better**
+
+# Configure Achievements
+
+The sample updates an achievement that counts the number of times a player has won.  Follow these steps to create an
+achievement that is unlocked when the player has won 10 matches:
+
+1. Navigate to your App Grouping section on the Developer Dashboard
+2. Click on the **Create Achievement** button
+3. Set the API Name to **LIKES_TO_WIN**
+4. Set an appropriate Title and Description
+5. Leave the Write Policy as **CLIENT_AUTHORITATIVE**
+6. Leave Is Achievement Secret untoggled
+7. Set the Type to **Count**
+7. Set the Target to *10*
 
 # Upload your builds
 

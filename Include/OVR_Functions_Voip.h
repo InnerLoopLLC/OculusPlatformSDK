@@ -14,8 +14,8 @@ OVRP_PUBLIC_FUNCTION(void) ovr_Voip_Accept(ovrID userID);
 
 /// Returns the size of the internal ringbuffer used by the voip system in
 /// elements. This size is the maximum number of elements that can ever be
-/// returned by ovr_Voip_GetPCMData.
-/// 
+/// returned by ovr_Voip_GetPCM().
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetOutputBufferMaxSize();
 
@@ -24,7 +24,7 @@ OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetOutputBufferMaxSize();
 /// rate of 480 samples per 10ms. This function should be called every frame
 /// with 50ms (2400 elements) of buffer size to account for frame rate
 /// variations. The data format is 16 bit fixed point 48khz mono.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetPCM(ovrID senderID, int16_t *outputBuffer, size_t outputBufferNumElements);
 
@@ -33,15 +33,15 @@ OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetPCM(ovrID senderID, int16_t *outputBuff
 /// rate of 480 samples per 10ms. This function should be called every frame
 /// with 50ms (2400 elements) of buffer size to account for frame rate
 /// variations. The data format is 32 bit floating point 48khz mono.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetPCMFloat(ovrID senderID, float *outputBuffer, size_t outputBufferNumElements);
 
 /// Returns the current number of audio samples available to read for the
 /// specified user. This function is inherently racy; it's possible that more
 /// data can be added between a call to this function and a subsequent call to
-/// ovr_Voip_GetPCM.
-/// 
+/// ovr_Voip_GetPCM().
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(size_t) ovr_Voip_GetPCMSize(ovrID senderID);
 
@@ -59,7 +59,7 @@ OVRP_PUBLIC_FUNCTION(ovrSystemVoipStatus) ovr_Voip_GetSystemVoipStatus();
 /// elements. numChannels will be 1 or 2. If numChannels is 2, then the channel
 /// data will be interleaved in pcmData. Frequency is the input data sample
 /// rate in hertz.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(void) ovr_Voip_SetMicrophoneFilterCallback(VoipFilterCallback cb);
 
@@ -68,27 +68,27 @@ OVRP_PUBLIC_FUNCTION(void) ovr_Voip_SetMicrophoneFilterCallback(VoipFilterCallba
 /// unaffected by this state. New connections can be established or closed
 /// whether the microphone is muted or not. This can be used to implement push-
 /// to-talk, or a local mute button. The default state is unmuted.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(void) ovr_Voip_SetMicrophoneMuted(ovrVoipMuteState state);
 
 /// Sets the output sample rate. Audio data will be resampled as it is placed
 /// into the internal ringbuffer.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(void) ovr_Voip_SetOutputSampleRate(ovrVoipSampleRate rate);
 
 /// Attempts to establish a VoIP session with the specified user. Message of
-/// type ovrMessage_Notification_Voip_StateChange will be posted when the
-/// session gets established.
-/// 
+/// type ovrNotification_Voip_StateChange will be posted when the session gets
+/// established.
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(void) ovr_Voip_Start(ovrID userID);
 
 /// Terminates a VoIP session with the specified user. Note that a muting
 /// functionality should be used to temporarily stop sending audio; restarting
 /// a VoIP session after tearing it down may be an expensive operation.
-/// 
+///
 /// This function can be safely called from any thread.
 OVRP_PUBLIC_FUNCTION(void) ovr_Voip_Stop(ovrID userID);
 

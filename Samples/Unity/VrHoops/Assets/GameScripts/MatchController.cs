@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using Oculus.Platform.Models;
 
 // This class coordinates playing matches.  It mediates being idle
@@ -34,6 +35,18 @@ public class MatchController : MonoBehaviour
     // how long to remain in position after the match to view results
     [SerializeField] private uint MATCH_COOLDOWN_TIME = 10;
 
+    // panel to add most-wins leaderboard entries to
+    [SerializeField] private GameObject m_mostWinsLeaderboard;
+
+    // panel to add high-score leaderboard entries to
+    [SerializeField] private GameObject m_highestScoresLeaderboard;
+
+    // leaderboard entry Text prefab
+    [SerializeField] private GameObject m_leaderboardEntryPrefab;
+
+    // Text prefab to use for achievements fly-text
+    [SerializeField] private GameObject m_flytext;
+
     // the current state of the match controller
     private State m_currentState;
 
@@ -41,11 +54,16 @@ public class MatchController : MonoBehaviour
     // for example ending the match when the timer expires
     private float m_nextStateTransitionTime;
 
+    // the court the local player was assigned to
+    private int m_localSlot;
+
     void Start()
     {
         PlatformManager.Matchmaking.EnqueueResultCallback = OnMatchFoundCallback;
         PlatformManager.Matchmaking.MatchPlayerAddedCallback = MatchPlayerAddedCallback;
         PlatformManager.P2P.StartTimeOfferCallback = StartTimeOfferCallback;
+        PlatformManager.Leaderboards.MostWinsLeaderboardUpdatedCallback = MostWinsLeaderboardCallback;
+        PlatformManager.Leaderboards.HighScoreLeaderboardUpdatedCallback = HighestScoreLeaderboardCallback;
 
         TransitionToState(State.NONE);
     }
@@ -166,6 +184,7 @@ public class MatchController : MonoBehaviour
                     PlatformManager.TransitionToState(PlatformManager.State.MATCH_TRANSITION);
                     m_nextStateTransitionTime = Time.time + MATCH_COOLDOWN_TIME;
                     m_timerText.text = "0:00.00";
+                    CalculateMatchResults();
                     break;
             }
         }
@@ -243,11 +262,11 @@ public class MatchController : MonoBehaviour
     void SetupForPractice()
     {
         // randomly select a position for the local player
-        int localPos = Random.Range(0,m_playerAreas.Length-1);
+        m_localSlot = Random.Range(0,m_playerAreas.Length-1);
 
         for (int i=0; i < m_playerAreas.Length; i++)
         {
-            if (i == localPos)
+            if (i == m_localSlot)
             {
                 m_playerAreas[i].SetupForPlayer<LocalPlayer>(PlatformManager.MyOculusID);
             }
@@ -269,6 +288,7 @@ public class MatchController : MonoBehaviour
                 var localPlayer = m_playerAreas[slot].SetupForPlayer<LocalPlayer>(user.OculusID);
                 MoveCameraToMatchPosition();
                 player = localPlayer;
+                m_localSlot = slot;
             }
             else
             {
@@ -308,6 +328,7 @@ public class MatchController : MonoBehaviour
                 break;
             }
         }
+        DisplayAchievementFlytext();
     }
 
     #endregion
@@ -364,6 +385,84 @@ public class MatchController : MonoBehaviour
             }
         }
         return MatchStartTime;
+    }
+
+    #endregion
+
+    #region Leaderboards and Achievements
+
+    void MostWinsLeaderboardCallback(SortedDictionary<int, LeaderboardEntry> entries)
+    {
+        foreach (Transform entry in m_mostWinsLeaderboard.transform)
+        {
+            Destroy(entry.gameObject);
+        }
+        foreach (var entry in entries.Values)
+        {
+            GameObject label = Instantiate(m_leaderboardEntryPrefab);
+            label.transform.SetParent(m_mostWinsLeaderboard.transform, false);
+            label.GetComponent<Text>().text =
+                string.Format("{0} - {1} - {2}", entry.Rank, entry.User.OculusID, entry.Score);
+        }
+    }
+
+    void HighestScoreLeaderboardCallback(SortedDictionary<int, LeaderboardEntry> entries)
+    {
+        foreach (Transform entry in m_highestScoresLeaderboard.transform)
+        {
+            Destroy(entry.gameObject);
+        }
+        foreach (var entry in entries.Values)
+        {
+            GameObject label = Instantiate(m_leaderboardEntryPrefab);
+            label.transform.SetParent(m_highestScoresLeaderboard.transform, false);
+            label.GetComponent<Text>().text =
+                string.Format("{0} - {1} - {2}", entry.Rank, entry.User.OculusID, entry.Score);
+        }
+    }
+
+    void CalculateMatchResults()
+    {
+        LocalPlayer localPlayer = null;
+        RemotePlayer remotePlayer = null;
+
+        foreach (var court in m_playerAreas)
+        {
+            if (court.Player is LocalPlayer)
+            {
+                localPlayer = court.Player as LocalPlayer;
+            }
+            else if (court.Player is RemotePlayer &&
+                (remotePlayer == null || court.Player.Score > remotePlayer.Score))
+            {
+                remotePlayer = court.Player as RemotePlayer;
+            }
+        }
+
+        // ignore the match results if the player got into a session without an opponent
+        if (!localPlayer || !remotePlayer)
+        {
+            return;
+        }
+
+        bool wonMatch = localPlayer.Score > remotePlayer.Score;
+        PlatformManager.Leaderboards.SubmitMatchScores(wonMatch, localPlayer.Score);
+
+        if (wonMatch)
+        {
+            PlatformManager.Achievements.RecordWinForLocalUser();
+        }
+    }
+
+    void DisplayAchievementFlytext()
+    {
+        if (PlatformManager.Achievements.LikesToWin)
+        {
+            GameObject go = Instantiate(m_flytext);
+            go.GetComponent<Text>().text = "Likes to Win!";
+            go.transform.position = Vector3.up * 40;
+            go.transform.SetParent(m_playerAreas[m_localSlot].NameText.transform, false);
+        }
     }
 
     #endregion

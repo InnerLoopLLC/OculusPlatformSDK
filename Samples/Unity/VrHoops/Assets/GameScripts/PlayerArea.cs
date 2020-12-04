@@ -16,6 +16,16 @@ public class PlayerArea : MonoBehaviour
     // cached component used to align the backboard movement between devices
     private P2PNetworkGoal m_p2pGoal;
 
+    public Player Player
+    {
+        get { return m_playerHead.GetComponent<Player>(); }
+    }
+
+    public Text NameText
+    {
+        get { return m_nameText; }
+    }
+
     void Awake()
     {
         m_playerHead = gameObject.transform.FindChild("Player Head").gameObject;

@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 // Uses two triggers to detect that a basket is made by traveling from top to bottom
 // through the hoop.
-public class DetectBasket : MonoBehaviour {
-
+public class DetectBasket : MonoBehaviour
+{
     private enum BasketPhase { NONE, TOP, BOTH, BOTTOM }
 
     private BasketPhase m_phase = BasketPhase.NONE;
