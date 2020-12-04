@@ -21,6 +21,7 @@ OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetEndDate(ovrChallengeOptionsHa
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetIncludeActiveChallenges(ovrChallengeOptionsHandle handle, bool value);
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetIncludeFutureChallenges(ovrChallengeOptionsHandle handle, bool value);
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetIncludePastChallenges(ovrChallengeOptionsHandle handle, bool value);
+/// Optional: Only find challenges belonging to this leaderboard.
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetLeaderboardName(ovrChallengeOptionsHandle handle, const char * value);
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetStartDate(ovrChallengeOptionsHandle handle, unsigned long long value);
 OVRP_PUBLIC_FUNCTION(void) ovr_ChallengeOptions_SetTitle(ovrChallengeOptionsHandle handle, const char * value);
