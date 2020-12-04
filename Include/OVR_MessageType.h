@@ -156,6 +156,14 @@ typedef enum ovrMessageType_ {
   /// Extract the payload from the message handle with ::ovr_Message_GetString().
   ovrMessage_Notification_Room_InviteAccepted = 0x6D1071B1,
 
+  /// Handle this to notify the user when they've received an invitation to join
+  /// a room in your game. You can use this in lieu of, or in addition to,
+  /// polling for room invitations via ovr_Notification_GetRoomInvites().
+  ///
+  /// The message will contain a payload of type ::ovrRoomInviteNotificationHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetRoomInviteNotification().
+  ovrMessage_Notification_Room_InviteReceived = 0x6A499D54,
+
   /// Indicates that the current room has been updated. Use ovr_Message_GetRoom()
   /// to extract the updated room.
   ///

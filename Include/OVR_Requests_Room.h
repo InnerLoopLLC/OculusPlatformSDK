@@ -267,7 +267,9 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetModeratedRooms();
 /// Extract the payload from the message handle with ::ovr_Message_GetRoomArray().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetNextRoomArrayPage(ovrRoomArrayHandle handle);
 
-/// Invites a user to the specified room.
+/// Invites a user to the specified room. They will receive a notification via
+/// ovrNotification_Room_InviteReceived if they are in your game, and/or they
+/// can poll for room invites using ovr_Notification_GetRoomInvites().
 /// \param roomID The ID of your current room.
 /// \param inviteToken A user's invite token, returned by ovr_Room_GetInvitableUsers().
 ///
