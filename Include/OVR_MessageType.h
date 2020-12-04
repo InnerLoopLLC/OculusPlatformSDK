@@ -176,6 +176,19 @@ typedef enum ovrMessageType_ {
   /// matchmaking room.
   ovrMessage_Notification_Matchmaking_MatchFound = 0x0BC3FCD7,
 
+  /// Sent when the status of a connection has changed.
+  ///
+  /// The message will contain a payload of type ::ovrNetSyncConnectionHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetNetSyncConnection().
+  ovrMessage_Notification_NetSync_ConnectionStatusChanged = 0x073484CA,
+
+  /// Sent when the list of known connected sessions has changed. Contains the
+  /// new list of sessions.
+  ///
+  /// The message will contain a payload of type ::ovrNetSyncSessionsChangedNotificationHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetNetSyncSessionsChangedNotification().
+  ovrMessage_Notification_NetSync_SessionsChanged = 0x387E7F36,
+
   /// Indicates that a connection has been established or there's been an error.
   /// Use ovr_NetworkingPeer_GetState() to get the result; as above,
   /// ovr_NetworkingPeer_GetID() returns the ID of the peer this message is for.
