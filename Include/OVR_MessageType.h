@@ -3,6 +3,8 @@
 #ifndef OVR_MESSAGETYPE_H
 #define OVR_MESSAGETYPE_H
 
+#include <stdbool.h>
+
 #include "OVR_Platform_Defs.h"
 
 typedef enum ovrMessageType_ {
@@ -198,5 +200,9 @@ typedef enum ovrMessageType_ {
 /// Convert an ovrMessageType to a human readable string
 ///
 OVRPL_PUBLIC_FUNCTION(const char*) ovrMessageType_ToString(ovrMessageType value);
+
+/// Return true if an ovrMessageType is a notification
+///
+OVRPL_PUBLIC_FUNCTION(bool) ovrMessageType_IsNotification(ovrMessageType value);
 
 #endif

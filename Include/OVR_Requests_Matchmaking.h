@@ -573,6 +573,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_JoinRoom(ovrID roomID, bool sub
 /// update the skills of all players involved, based on the results. This
 /// method is insecure because, as a client API, it is susceptible to tampering
 /// and therefore cheating to manipulate skill ratings.
+/// \param roomID The room ID
+/// \param data key value pairs
 /// \param numItems The length of data
 ///
 /// A message with type ::ovrMessage_Matchmaking_ReportResultInsecure will be generated in response.

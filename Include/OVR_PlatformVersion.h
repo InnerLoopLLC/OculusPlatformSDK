@@ -11,7 +11,7 @@
 #define PLATFORM_PRODUCT_VERSION 1 // Product version doesn't participate in semantic versioning.
 // If you change these values then you need to also make sure to change LibOVRPlatform.props in parallel.
 #define PLATFORM_MAJOR_VERSION   1
-#define PLATFORM_MINOR_VERSION   14
+#define PLATFORM_MINOR_VERSION   15
 #define PLATFORM_PATCH_VERSION   0
 #define PLATFORM_BUILD_NUMBER    0
 #define PLATFORM_DRIVER_VERSION  0
@@ -20,7 +20,8 @@
     #define PLATFORM_VERSION_STRING OVR_STRINGIZE(PLATFORM_MAJOR_VERSION.PLATFORM_MINOR_VERSION.PLATFORM_PATCH_VERSION.PLATFORM_BUILD_NUMBER)
 #endif
 
-// This appears in the user-visible file properties.  TeamCity builds will stamp PLATFORM_DESCRIPTION_STRING.
+// This appears in the user-visible file properties.
+// TeamCity builds will stamp PLATFORM_DESCRIPTION_STRING.
 #if !defined(PLATFORM_DESCRIPTION_STRING)
     #if defined(_DEBUG)
         #define PLATFORM_DESCRIPTION_STRING "dev build debug"

@@ -8,7 +8,7 @@
 
 
 /// \file
-/// #Livestreaming Overview
+/// # Livestreaming Overview
 ///
 /// Livestreaming to Facebook is a great way to increase visibility of your
 /// application to people that might not have a VR Headset.

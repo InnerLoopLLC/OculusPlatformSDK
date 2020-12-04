@@ -47,6 +47,12 @@
 #include "OVR_PermissionGrantStatus.h"
 #include "OVR_Voip_LowLevel.h"
 #include "OVR_PlatformInitializeResult.h"
+#include "OVR_LivestreamingAudience.h"
+#include "OVR_LivestreamingMicrophoneStatus.h"
+#include "OVR_LivestreamingStartStatus.h"
+#include "OVR_LivestreamingApplicationStatus.h"
+#include "OVR_LivestreamingStartResult.h"
+#include "OVR_LivestreamingVideoStats.h"
 
 #include "OVR_Requests_Achievements.h"
 #include "OVR_Requests_Application.h"
