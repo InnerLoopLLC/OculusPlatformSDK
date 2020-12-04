@@ -222,9 +222,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetCurrent();
 /// Extract the payload from the message handle with ::ovr_Message_GetRoom().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetCurrentForUser(ovrID userID);
 
-/// Loads a list of users you can invite to your current room. These are pulled
-/// from your friends list and filtered for relevance and interest. If your
-/// current room cannot be joined, this list will be empty.
+/// DEPRECATED. Use GetInvitableUsers2.
 ///
 /// A message with type ::ovrMessage_Room_GetInvitableUsers will be generated in response.
 ///
@@ -234,9 +232,26 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetCurrentForUser(ovrID userID);
 /// Extract the payload from the message handle with ::ovr_Message_GetUserArray().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_GetInvitableUsers();
 
-/// Loads a list of users you can invite to your current room. These are pulled
-/// from your friends list and filtered for relevance and interest. If your
-/// current room cannot be joined, this list will be empty.
+/// Loads a list of users you can invite to a room. These are pulled from your
+/// friends list and filtered for relevance and interest. If the room cannot be
+/// joined, this list will be empty. By default, the invitable users returned
+/// will be for the user's current room.
+///
+/// Customization can be done via RoomOptions. Create this object with
+/// ovr_RoomOptions_Create. The params that could be used are:
+///
+/// 1. roomID - will return the invitable users for this room (instead of the
+/// current room).
+///
+/// 2. ordering - returns the list of users in the provided ordering (see
+/// UserOrdering enum).
+///
+/// Example usage:
+///
+///   auto roomOptions = ovr_RoomOptions_Create();
+///   ovr_RoomOptions_SetOrdering(roomOptions, ovrUserOrdering_PresenceAlphabetical);
+///   ovr_RoomOptions_SetRoomId(roomOptions, roomID);
+///   ovr_Room_GetInvitableUsers2(roomOptions);
 /// \param roomOptions Additional configuration for this request. Optional.
 ///
 /// A message with type ::ovrMessage_Room_GetInvitableUsers2 will be generated in response.

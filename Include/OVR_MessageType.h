@@ -96,10 +96,13 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetLoggedInUser                                = 0x436F345D, ///< Generated in response to ovr_User_GetLoggedInUser()
   ovrMessage_User_GetLoggedInUserFriends                         = 0x587C2A8D, ///< Generated in response to ovr_User_GetLoggedInUserFriends()
   ovrMessage_User_GetLoggedInUserFriendsAndRooms                 = 0x5E870B87, ///< Generated in response to ovr_User_GetLoggedInUserFriendsAndRooms()
+  ovrMessage_User_GetLoggedInUserRecentlyMetUsersAndRooms        = 0x295FBA30, ///< Generated in response to ovr_User_GetLoggedInUserRecentlyMetUsersAndRooms()
   ovrMessage_User_GetNextUserAndRoomArrayPage                    = 0x7FBDD2DF, ///< Generated in response to ovr_User_GetNextUserAndRoomArrayPage()
   ovrMessage_User_GetNextUserArrayPage                           = 0x267CF743, ///< Generated in response to ovr_User_GetNextUserArrayPage()
   ovrMessage_User_GetOrgScopedID                                 = 0x18F0B01B, ///< Generated in response to ovr_User_GetOrgScopedID()
+  ovrMessage_User_GetSdkAccounts                                 = 0x67526A83, ///< Generated in response to ovr_User_GetSdkAccounts()
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
+  ovrMessage_User_LaunchProfile                                  = 0x0A397297, ///< Generated in response to ovr_User_LaunchProfile()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
 
   /// Sent to indicate that more data has been read or an error occured.
