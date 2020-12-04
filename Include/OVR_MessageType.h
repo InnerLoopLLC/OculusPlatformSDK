@@ -25,6 +25,10 @@ typedef enum ovrMessageType_ {
   ovrMessage_ApplicationLifecycle_GetSessionKey                  = 0x3AAF591D, ///< Generated in response to ovr_ApplicationLifecycle_GetSessionKey()
   ovrMessage_ApplicationLifecycle_RegisterSessionKey             = 0x4DB6AFF8, ///< Generated in response to ovr_ApplicationLifecycle_RegisterSessionKey()
   ovrMessage_Application_GetVersion                              = 0x68670A0E, ///< Generated in response to ovr_Application_GetVersion()
+  ovrMessage_Application_LaunchOtherApp                          = 0x54E2D1F8, ///< Generated in response to ovr_Application_LaunchOtherApp()
+  ovrMessage_AssetFile_Delete                                    = 0x6D5D7886, ///< Generated in response to ovr_AssetFile_Delete()
+  ovrMessage_AssetFile_Download                                  = 0x11449FC5, ///< Generated in response to ovr_AssetFile_Download()
+  ovrMessage_AssetFile_DownloadCancel                            = 0x080AD3C7, ///< Generated in response to ovr_AssetFile_DownloadCancel()
   ovrMessage_CloudStorage_Delete                                 = 0x28DA456D, ///< Generated in response to ovr_CloudStorage_Delete()
   ovrMessage_CloudStorage_GetNextCloudStorageMetadataArrayPage   = 0x5C07A2EF, ///< Generated in response to ovr_CloudStorage_GetNextCloudStorageMetadataArrayPage()
   ovrMessage_CloudStorage_Load                                   = 0x40846B41, ///< Generated in response to ovr_CloudStorage_Load()
@@ -105,6 +109,21 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
   ovrMessage_User_LaunchProfile                                  = 0x0A397297, ///< Generated in response to ovr_User_LaunchProfile()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
+
+  /// Sent when a launch intent is received (for both cold and warm starts). The
+  /// payload is the type of the intent.
+  /// ovr_ApplicationLifecycle_GetLaunchDetails() should be called to get the
+  /// other details.
+  ///
+  /// The message will contain a payload of type const char *.
+  /// Extract the payload from the message handle with ::ovr_Message_GetString().
+  ovrMessage_Notification_ApplicationLifecycle_LaunchIntentChanged = 0x04B34CA3,
+
+  /// Sent to indicate download progress for asset files.
+  ///
+  /// The message will contain a payload of type ::ovrAssetFileDownloadUpdateHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetAssetFileDownloadUpdate().
+  ovrMessage_Notification_AssetFile_DownloadUpdate = 0x2FDD0CCD,
 
   /// Sent to indicate that more data has been read or an error occured.
   ///

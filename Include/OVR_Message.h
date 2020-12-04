@@ -8,6 +8,10 @@
 #include "OVR_AchievementProgressArray.h"
 #include "OVR_AchievementUpdate.h"
 #include "OVR_ApplicationVersion.h"
+#include "OVR_AssetFileDeleteResult.h"
+#include "OVR_AssetFileDownloadCancelResult.h"
+#include "OVR_AssetFileDownloadResult.h"
+#include "OVR_AssetFileDownloadUpdate.h"
 #include "OVR_CloudStorageConflictMetadata.h"
 #include "OVR_CloudStorageData.h"
 #include "OVR_CloudStorageMetadata.h"
@@ -61,6 +65,10 @@ OVRP_PUBLIC_FUNCTION(ovrAchievementDefinitionArrayHandle)      ovr_Message_GetAc
 OVRP_PUBLIC_FUNCTION(ovrAchievementProgressArrayHandle)        ovr_Message_GetAchievementProgressArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrAchievementUpdateHandle)               ovr_Message_GetAchievementUpdate(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrApplicationVersionHandle)              ovr_Message_GetApplicationVersion(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrAssetFileDeleteResultHandle)           ovr_Message_GetAssetFileDeleteResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrAssetFileDownloadCancelResultHandle)   ovr_Message_GetAssetFileDownloadCancelResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrAssetFileDownloadResultHandle)         ovr_Message_GetAssetFileDownloadResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrAssetFileDownloadUpdateHandle)         ovr_Message_GetAssetFileDownloadUpdate(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageConflictMetadataHandle)    ovr_Message_GetCloudStorageConflictMetadata(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageDataHandle)                ovr_Message_GetCloudStorageData(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataHandle)            ovr_Message_GetCloudStorageMetadata(const ovrMessageHandle obj);
