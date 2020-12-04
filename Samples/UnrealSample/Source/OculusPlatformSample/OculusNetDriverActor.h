@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = Identity)
 	void OnPlayerIDUpdate(const FString& PlayerID);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = Identity)
+	void SendPlayerChat(const FString& PlayerID);
+
 	FString PlayerID;
 
 	virtual void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error) override;
