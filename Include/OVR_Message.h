@@ -26,6 +26,7 @@
 #include "OVR_CloudStorageMetadata.h"
 #include "OVR_CloudStorageMetadataArray.h"
 #include "OVR_CloudStorageUpdateResponse.h"
+#include "OVR_DataStore.h"
 #include "OVR_DestinationArray.h"
 #include "OVR_Error.h"
 #include "OVR_HttpTransferUpdate.h"
@@ -76,6 +77,7 @@
 #include "OVR_User.h"
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
+#include "OVR_UserDataStoreUpdateResponse.h"
 #include "OVR_UserProof.h"
 #include "OVR_UserReportID.h"
 #include <stdbool.h>
@@ -104,6 +106,7 @@ OVRP_PUBLIC_FUNCTION(ovrCloudStorageDataHandle)                   ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataHandle)               ovr_Message_GetCloudStorageMetadata(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageMetadataArrayHandle)          ovr_Message_GetCloudStorageMetadataArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrCloudStorageUpdateResponseHandle)         ovr_Message_GetCloudStorageUpdateResponse(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrDataStoreHandle)                          ovr_Message_GetDataStore(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrDestinationArrayHandle)                   ovr_Message_GetDestinationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrErrorHandle)                              ovr_Message_GetError(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrHttpTransferUpdateHandle)                 ovr_Message_GetHttpTransferUpdate(const ovrMessageHandle obj);
@@ -156,6 +159,7 @@ OVRP_PUBLIC_FUNCTION(ovrMessageType)                              ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrUserHandle)                               ovr_Message_GetUser(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserAndRoomArrayHandle)                   ovr_Message_GetUserAndRoomArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserArrayHandle)                          ovr_Message_GetUserArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrUserDataStoreUpdateResponseHandle)        ovr_Message_GetUserDataStoreUpdateResponse(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserProofHandle)                          ovr_Message_GetUserProof(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserReportIDHandle)                       ovr_Message_GetUserReportID(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(bool)                                        ovr_Message_IsError(const ovrMessageHandle obj);

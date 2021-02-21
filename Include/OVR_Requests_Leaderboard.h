@@ -198,4 +198,20 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_GetPreviousEntries(const ovrLea
 /// Extract the payload from the message handle with ::ovr_Message_GetLeaderboardUpdateStatus().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_WriteEntry(const char *leaderboardName, long long score, const void *extraData, unsigned int extraDataLength, bool forceUpdate);
 
+/// Writes a single entry to a leaderboard, can include supplementary metrics
+/// \param leaderboardName The leaderboard for which to write the entry.
+/// \param score The score to write.
+/// \param supplementaryMetric A metric that can be used for tiebreakers.
+/// \param extraData A 2KB custom data field that is associated with the leaderboard entry. This can be a game replay or anything that provides more detail about the entry to the viewer.
+/// \param extraDataLength The length of the extra data.
+/// \param forceUpdate If true, the score always updates. This happens ecen if it is not the user's best score.
+///
+/// A message with type ::ovrMessage_Leaderboard_WriteEntryWithSupplementaryMetric will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrLeaderboardUpdateStatusHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetLeaderboardUpdateStatus().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_WriteEntryWithSupplementaryMetric(const char *leaderboardName, long long score, long long supplementaryMetric, const void *extraData, unsigned int extraDataLength, bool forceUpdate);
+
 #endif
