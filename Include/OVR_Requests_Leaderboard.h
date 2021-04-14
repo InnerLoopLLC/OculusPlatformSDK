@@ -6,6 +6,8 @@
 #include "OVR_Types.h"
 #include "OVR_Platform_Defs.h"
 
+#include "OVR_LeaderboardArray.h"
+#include "OVR_LeaderboardArray.h"
 #include "OVR_LeaderboardEntryArray.h"
 #include "OVR_LeaderboardFilterType.h"
 #include "OVR_LeaderboardStartAt.h"
@@ -112,6 +114,17 @@
 ///   }
 ///
 
+/// Gets the information for a single leaderboard
+/// \param leaderboardName The name of the leaderboard to return.
+///
+/// A message with type ::ovrMessage_Leaderboard_Get will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrLeaderboardArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetLeaderboardArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_Get(const char *leaderboardName);
+
 /// Requests a block of leaderboard entries.
 /// \param leaderboardName The name of the leaderboard whose entries to return.
 /// \param limit Defines the maximum number of entries to return.
@@ -168,6 +181,16 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_GetEntriesByIds(const char *lea
 /// If no error occurred, the message will contain a payload of type ::ovrLeaderboardEntryArrayHandle.
 /// Extract the payload from the message handle with ::ovr_Message_GetLeaderboardEntryArray().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_GetNextEntries(const ovrLeaderboardEntryArrayHandle handle);
+
+/// Get the next page of entries
+///
+/// A message with type ::ovrMessage_Leaderboard_GetNextLeaderboardArrayPage will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrLeaderboardArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetLeaderboardArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_GetNextLeaderboardArrayPage(ovrLeaderboardArrayHandle handle);
 
 /// Requests the previous block of leaderboard entries.
 /// \param handle The return value from ovr_Message_GetLeaderboardEntryArray().

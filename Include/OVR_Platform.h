@@ -51,6 +51,7 @@
 #include "OVR_LaunchReportFlowResult.h"
 #include "OVR_LaunchUnblockFlowResult.h"
 #include "OVR_Leaderboard.h"
+#include "OVR_LeaderboardArray.h"
 #include "OVR_LeaderboardEntry.h"
 #include "OVR_LeaderboardEntryArray.h"
 #include "OVR_LeaderboardUpdateStatus.h"

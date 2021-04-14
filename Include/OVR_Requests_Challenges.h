@@ -13,7 +13,7 @@
 #include "OVR_LeaderboardStartAt.h"
 #include <stdbool.h>
 
-/// Creates a new user challenge
+/// DEPRECATED. Use server-to-server API call instead.
 ///
 /// A message with type ::ovrMessage_Challenges_Create will be generated in response.
 ///
@@ -33,7 +33,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Challenges_Create(const char *leaderboardNa
 /// Extract the payload from the message handle with ::ovr_Message_GetChallenge().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Challenges_DeclineInvite(ovrID challengeID);
 
-/// If the current user has permission, deletes a challenge
+/// DEPRECATED. Use server-to-server API call instead.
 ///
 /// A message with type ::ovrMessage_Challenges_Delete will be generated in response.
 ///
@@ -170,7 +170,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Challenges_Join(ovrID challengeID);
 /// Extract the payload from the message handle with ::ovr_Message_GetChallenge().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Challenges_Leave(ovrID challengeID);
 
-/// If the current user has permission, updates a challenge information
+/// DEPRECATED. Use server-to-server API call instead.
 ///
 /// A message with type ::ovrMessage_Challenges_UpdateInfo will be generated in response.
 ///

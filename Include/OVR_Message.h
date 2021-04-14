@@ -35,6 +35,7 @@
 #include "OVR_LaunchFriendRequestFlowResult.h"
 #include "OVR_LaunchReportFlowResult.h"
 #include "OVR_LaunchUnblockFlowResult.h"
+#include "OVR_LeaderboardArray.h"
 #include "OVR_LeaderboardEntryArray.h"
 #include "OVR_LeaderboardUpdateStatus.h"
 #include "OVR_LinkedAccountArray.h"
@@ -115,6 +116,7 @@ OVRP_PUBLIC_FUNCTION(ovrLaunchBlockFlowResultHandle)              ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrLaunchFriendRequestFlowResultHandle)      ovr_Message_GetLaunchFriendRequestFlowResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLaunchReportFlowResultHandle)             ovr_Message_GetLaunchReportFlowResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLaunchUnblockFlowResultHandle)            ovr_Message_GetLaunchUnblockFlowResult(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrLeaderboardArrayHandle)                   ovr_Message_GetLeaderboardArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLeaderboardEntryArrayHandle)              ovr_Message_GetLeaderboardEntryArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLeaderboardUpdateStatusHandle)            ovr_Message_GetLeaderboardUpdateStatus(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrLinkedAccountArrayHandle)                 ovr_Message_GetLinkedAccountArray(const ovrMessageHandle obj);
