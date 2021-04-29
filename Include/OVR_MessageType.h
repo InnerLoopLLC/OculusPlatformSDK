@@ -184,6 +184,16 @@ typedef enum ovrMessageType_ {
   /// Extract the payload from the message handle with ::ovr_Message_GetCalApplicationProposed().
   ovrMessage_Notification_Cal_ProposeApplication = 0x2E7451F5,
 
+  /// Sent when the user has chosen to leave the destination/lobby/match from the
+  /// Oculus menu. Read the specific fields to check the user is currently from
+  /// the destination/lobby/match and take the appropriate actions to remove
+  /// them. Update the user's presence clearing the appropriate fields to
+  /// indicate the user has left.
+  ///
+  /// The message will contain a payload of type ::ovrGroupPresenceLeaveIntentHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetGroupPresenceLeaveIntent().
+  ovrMessage_Notification_GroupPresence_LeaveIntentReceived = 0x4737EA1D,
+
   /// Sent to indicate that more data has been read or an error occured.
   ///
   /// The message will contain a payload of type ::ovrHttpTransferUpdateHandle.
@@ -271,6 +281,13 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrRoomHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetRoom().
   ovrMessage_Notification_Room_RoomUpdate = 0x60EC3C2F,
+
+  /// Sent when the user is finished using the invite panel to send out
+  /// invitations. Contains a list of invitees.
+  ///
+  /// The message will contain a payload of type ::ovrLaunchInvitePanelFlowResultHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetLaunchInvitePanelFlowResult().
+  ovrMessage_Notification_Session_InvitationsSent = 0x07F9C880,
 
   /// Sent when another user is attempting to establish a VoIP connection. Use
   /// ovr_Message_GetNetworkingPeer() to extract information about the user, and

@@ -132,6 +132,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_Get(const char *leaderboardName
 /// \param startAt Defines whether to center the query on the user or start at the top of the leaderboard.
 ///
 /// <b>Error codes</b>
+/// - \b 100: Parameter {parameter}: invalid user id: {user_id}
+/// - \b 100: Something went wrong.
 /// - \b 12074: You're not yet ranked on this leaderboard.
 ///
 /// A message with type ::ovrMessage_Leaderboard_GetEntries will be generated in response.
@@ -212,6 +214,8 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_GetPreviousEntries(const ovrLea
 ///
 /// <b>Error codes</b>
 /// - \b 100: Parameter {parameter}: invalid user id: {user_id}
+/// - \b 100: Something went wrong.
+/// - \b 100: This leaderboard entry is too late for the leaderboard's allowed time window.
 ///
 /// A message with type ::ovrMessage_Leaderboard_WriteEntry will be generated in response.
 ///
@@ -228,6 +232,11 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Leaderboard_WriteEntry(const char *leaderbo
 /// \param extraData A 2KB custom data field that is associated with the leaderboard entry. This can be a game replay or anything that provides more detail about the entry to the viewer.
 /// \param extraDataLength The length of the extra data.
 /// \param forceUpdate If true, the score always updates. This happens ecen if it is not the user's best score.
+///
+/// <b>Error codes</b>
+/// - \b 100: Parameter {parameter}: invalid user id: {user_id}
+/// - \b 100: Something went wrong.
+/// - \b 100: This leaderboard entry is too late for the leaderboard's allowed time window.
 ///
 /// A message with type ::ovrMessage_Leaderboard_WriteEntryWithSupplementaryMetric will be generated in response.
 ///

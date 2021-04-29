@@ -58,6 +58,9 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetAccessToken();
 ///
 /// NOTE: Users will have a unique ID per application.
 ///
+/// <b>Error codes</b>
+/// - \b 100: Something went wrong.
+///
 /// A message with type ::ovrMessage_User_GetLoggedInUser will be generated in response.
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.

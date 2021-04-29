@@ -22,6 +22,12 @@ OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetDestinationApiName(const
 /// presence.
 OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetLaunchSource(const ovrLaunchDetailsHandle obj);
 
+/// If provided, the intended lobby the user would like to be in
+OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetLobbySessionID(const ovrLaunchDetailsHandle obj);
+
+/// If provided, the intended session the user would like to be in
+OVRP_PUBLIC_FUNCTION(const char *) ovr_LaunchDetails_GetMatchSessionID(const ovrLaunchDetailsHandle obj);
+
 /// If provided, the intended room the user would like to be in
 OVRP_PUBLIC_FUNCTION(ovrID) ovr_LaunchDetails_GetRoomID(const ovrLaunchDetailsHandle obj);
 

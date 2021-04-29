@@ -30,7 +30,8 @@ OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetDeeplinkMessageOverride(ov
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetEndTime(ovrRichPresenceOptionsHandle handle, unsigned long long value);
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetExtraContext(ovrRichPresenceOptionsHandle handle, ovrRichPresenceExtraContext value);
 /// Users reported with the same instance ID will be considered to be together
-/// and could interact with each other
+/// and could interact with each other. Renamed to
+/// ovr_RichPresenceOptions_SetInstanceId
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetInstanceId(ovrRichPresenceOptionsHandle handle, const char * value);
 /// Set whether or not the person is shown as active or idle
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetIsIdle(ovrRichPresenceOptionsHandle handle, bool value);
@@ -38,6 +39,18 @@ OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetIsIdle(ovrRichPresenceOpti
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetIsJoinable(ovrRichPresenceOptionsHandle handle, bool value);
 /// DEPRECATED: unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetJoinableId(ovrRichPresenceOptionsHandle handle, const char * value);
+/// This is a session that represents a group/squad/party of users that are to
+/// remain together across multiple rounds, matches, levels maps, game modes,
+/// etc. Users with the same lobby session id in their rich presence will be
+/// considered together.
+OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetLobbySessionId(ovrRichPresenceOptionsHandle handle, const char * value);
+/// This is a session that represents all the users that are playing a specific
+/// instance of a map, game mode, round, etc. This can include users from
+/// multiple different lobbies that joined together and the users may or may
+/// not remain together after the match is over. Users with the same match
+/// session id in their rich presence is also considered to be together but
+/// have a looser connection than those together in a lobby session.
+OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetMatchSessionId(ovrRichPresenceOptionsHandle handle, const char * value);
 /// The maximum that can join this user
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetMaxCapacity(ovrRichPresenceOptionsHandle handle, unsigned int value);
 /// The time the current match/game/round etc. started
