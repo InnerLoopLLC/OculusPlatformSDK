@@ -29,6 +29,7 @@
 #include "OVR_DataStore.h"
 #include "OVR_DestinationArray.h"
 #include "OVR_Error.h"
+#include "OVR_GroupPresenceJoinIntent.h"
 #include "OVR_GroupPresenceLeaveIntent.h"
 #include "OVR_HttpTransferUpdate.h"
 #include "OVR_InstalledApplicationArray.h"
@@ -53,6 +54,7 @@
 #include "OVR_MatchmakingRoomArray.h"
 #include "OVR_MatchmakingStats.h"
 #include "OVR_MessageType.h"
+#include "OVR_MicrophoneAvailabilityState.h"
 #include "OVR_NetSyncConnection.h"
 #include "OVR_NetSyncSessionArray.h"
 #include "OVR_NetSyncSessionsChangedNotification.h"
@@ -69,6 +71,7 @@
 #include "OVR_ProductArray.h"
 #include "OVR_Purchase.h"
 #include "OVR_PurchaseArray.h"
+#include "OVR_RejoinDialogResult.h"
 #include "OVR_Room.h"
 #include "OVR_RoomArray.h"
 #include "OVR_RoomInviteNotification.h"
@@ -113,6 +116,7 @@ OVRP_PUBLIC_FUNCTION(ovrCloudStorageUpdateResponseHandle)         ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrDataStoreHandle)                          ovr_Message_GetDataStore(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrDestinationArrayHandle)                   ovr_Message_GetDestinationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrErrorHandle)                              ovr_Message_GetError(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrGroupPresenceJoinIntentHandle)            ovr_Message_GetGroupPresenceJoinIntent(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrGroupPresenceLeaveIntentHandle)           ovr_Message_GetGroupPresenceLeaveIntent(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrHttpTransferUpdateHandle)                 ovr_Message_GetHttpTransferUpdate(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrInstalledApplicationArrayHandle)          ovr_Message_GetInstalledApplicationArray(const ovrMessageHandle obj);
@@ -136,6 +140,7 @@ OVRP_PUBLIC_FUNCTION(ovrMatchmakingEnqueueResultHandle)           ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrMatchmakingEnqueueResultAndRoomHandle)    ovr_Message_GetMatchmakingEnqueueResultAndRoom(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrMatchmakingRoomArrayHandle)               ovr_Message_GetMatchmakingRoomArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrMatchmakingStatsHandle)                   ovr_Message_GetMatchmakingStats(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrMicrophoneAvailabilityStateHandle)        ovr_Message_GetMicrophoneAvailabilityState(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrMessageHandle)                            ovr_Message_GetNativeMessage(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrNetSyncConnectionHandle)                  ovr_Message_GetNetSyncConnection(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrNetSyncSessionArrayHandle)                ovr_Message_GetNetSyncSessionArray(const ovrMessageHandle obj);
@@ -153,6 +158,7 @@ OVRP_PUBLIC_FUNCTION(ovrPlatformInitializeHandle)                 ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrProductArrayHandle)                       ovr_Message_GetProductArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrPurchaseHandle)                           ovr_Message_GetPurchase(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrPurchaseArrayHandle)                      ovr_Message_GetPurchaseArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrRejoinDialogResultHandle)                 ovr_Message_GetRejoinDialogResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRequest)                                  ovr_Message_GetRequestID(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRoomHandle)                               ovr_Message_GetRoom(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRoomArrayHandle)                          ovr_Message_GetRoomArray(const ovrMessageHandle obj);

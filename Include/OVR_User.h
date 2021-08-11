@@ -23,6 +23,12 @@ OVRP_PUBLIC_FUNCTION(const char *) ovr_User_GetPresenceDeeplinkMessage(const ovr
 /// If provided, the destination this user is currently at in the app
 OVRP_PUBLIC_FUNCTION(const char *) ovr_User_GetPresenceDestinationApiName(const ovrUserHandle obj);
 
+/// If provided, the lobby session this user is currently at in the app
+OVRP_PUBLIC_FUNCTION(const char *) ovr_User_GetPresenceLobbySessionId(const ovrUserHandle obj);
+
+/// If provided, the match session this user is currently at in the app
+OVRP_PUBLIC_FUNCTION(const char *) ovr_User_GetPresenceMatchSessionId(const ovrUserHandle obj);
+
 /// Enum value of what the user is currently doing.
 OVRP_PUBLIC_FUNCTION(ovrUserPresenceStatus) ovr_User_GetPresenceStatus(const ovrUserHandle obj);
 

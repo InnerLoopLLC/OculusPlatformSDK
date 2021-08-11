@@ -377,7 +377,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Browse2(const char *pool, ovrMa
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Cancel(const char *pool, const char *requestHash);
 
 /// Modes: QUICKMATCH, BROWSE
@@ -399,7 +399,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Cancel(const char *pool, const 
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_Cancel2();
 
 /// DEPRECATED. Use CreateAndEnqueueRoom2.
@@ -640,7 +640,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_JoinRoom(ovrID roomID, bool sub
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_ReportResultInsecure(ovrID roomID, ovrKeyValuePair *data, unsigned int numItems);
 
 /// Modes: QUICKMATCH, BROWSE (+ Skill Pool)
@@ -659,7 +659,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_ReportResultInsecure(ovrID room
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Matchmaking_StartMatch(ovrID roomID);
 
 #endif

@@ -15,7 +15,7 @@
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_RichPresence_Clear();
 
 /// Gets all the destinations that the presence can be set to
@@ -44,7 +44,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_RichPresence_GetNextDestinationArrayPage(ov
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_RichPresence_Set(ovrRichPresenceOptionsHandle richPresenceOptions);
 
 #endif

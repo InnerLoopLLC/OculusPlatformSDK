@@ -16,14 +16,21 @@ OVRP_PUBLIC_FUNCTION(ovrID) ovr_AssetFileDownloadUpdate_GetAssetFileId(const ovr
 OVRP_PUBLIC_FUNCTION(ovrID) ovr_AssetFileDownloadUpdate_GetAssetId(const ovrAssetFileDownloadUpdateHandle obj);
 
 /// Total number of bytes.
+///
+/// DEPRECATED. Use ovr_AssetFileDownloadUpdate_GetBytesTotalLong() instead
 OVRP_PUBLIC_FUNCTION(unsigned int) ovr_AssetFileDownloadUpdate_GetBytesTotal(const ovrAssetFileDownloadUpdateHandle obj);
 
 /// Number of bytes have been downloaded. -1 If the download hasn't started
 /// yet.
+///
+/// DEPRECATED. Use ovr_AssetFileDownloadUpdate_GetBytesTransferredLong()
+/// instead
 OVRP_PUBLIC_FUNCTION(int) ovr_AssetFileDownloadUpdate_GetBytesTransferred(const ovrAssetFileDownloadUpdateHandle obj);
 
 /// Flag indicating a download is completed.
 OVRP_PUBLIC_FUNCTION(bool) ovr_AssetFileDownloadUpdate_GetCompleted(const ovrAssetFileDownloadUpdateHandle obj);
 
+OVRP_PUBLIC_FUNCTION(unsigned long long) ovr_AssetFileDownloadUpdate_GetBytesTotalLong(const ovrAssetFileDownloadUpdateHandle obj);
+OVRP_PUBLIC_FUNCTION(long long)          ovr_AssetFileDownloadUpdate_GetBytesTransferredLong(const ovrAssetFileDownloadUpdateHandle obj);
 
 #endif

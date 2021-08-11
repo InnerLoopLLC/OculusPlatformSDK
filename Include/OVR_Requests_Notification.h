@@ -50,7 +50,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Notification_GetRoomInvites();
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Notification_MarkAsRead(ovrID notificationID);
 
 #endif

@@ -66,6 +66,16 @@ typedef enum ovrMessageType_ {
   ovrMessage_CloudStorage_ResolveKeepRemote                      = 0x7525A306, ///< Generated in response to ovr_CloudStorage_ResolveKeepRemote()
   ovrMessage_CloudStorage_Save                                   = 0x4BBB5C2E, ///< Generated in response to ovr_CloudStorage_Save()
   ovrMessage_Entitlement_GetIsViewerEntitled                     = 0x186B58B1, ///< Generated in response to ovr_Entitlement_GetIsViewerEntitled()
+  ovrMessage_GroupPresence_Clear                                 = 0x6DAA9CC3, ///< Generated in response to ovr_GroupPresence_Clear()
+  ovrMessage_GroupPresence_LaunchInvitePanel                     = 0x0F9ECF9F, ///< Generated in response to ovr_GroupPresence_LaunchInvitePanel()
+  ovrMessage_GroupPresence_LaunchMultiplayerErrorDialog          = 0x2955AF24, ///< Generated in response to ovr_GroupPresence_LaunchMultiplayerErrorDialog()
+  ovrMessage_GroupPresence_LaunchRejoinDialog                    = 0x1577036F, ///< Generated in response to ovr_GroupPresence_LaunchRejoinDialog()
+  ovrMessage_GroupPresence_LaunchRosterPanel                     = 0x35728882, ///< Generated in response to ovr_GroupPresence_LaunchRosterPanel()
+  ovrMessage_GroupPresence_Set                                   = 0x675F5C24, ///< Generated in response to ovr_GroupPresence_Set()
+  ovrMessage_GroupPresence_SetDestination                        = 0x4C5B268A, ///< Generated in response to ovr_GroupPresence_SetDestination()
+  ovrMessage_GroupPresence_SetIsJoinable                         = 0x2A8F1055, ///< Generated in response to ovr_GroupPresence_SetIsJoinable()
+  ovrMessage_GroupPresence_SetLobbySession                       = 0x48FF55BE, ///< Generated in response to ovr_GroupPresence_SetLobbySession()
+  ovrMessage_GroupPresence_SetMatchSession                       = 0x314C84B8, ///< Generated in response to ovr_GroupPresence_SetMatchSession()
   ovrMessage_IAP_ConsumePurchase                                 = 0x1FBB72D9, ///< Generated in response to ovr_IAP_ConsumePurchase()
   ovrMessage_IAP_GetNextProductArrayPage                         = 0x1BD94AAF, ///< Generated in response to ovr_IAP_GetNextProductArrayPage()
   ovrMessage_IAP_GetNextPurchaseArrayPage                        = 0x47570A95, ///< Generated in response to ovr_IAP_GetNextPurchaseArrayPage()
@@ -155,6 +165,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
   ovrMessage_User_LaunchFriendRequestFlow                        = 0x0904B598, ///< Generated in response to ovr_User_LaunchFriendRequestFlow()
   ovrMessage_User_LaunchProfile                                  = 0x0A397297, ///< Generated in response to ovr_User_LaunchProfile()
+  ovrMessage_Voip_GetMicrophoneAvailability                      = 0x744CE345, ///< Generated in response to ovr_Voip_GetMicrophoneAvailability()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
 
   /// Sent when a launch intent is received (for both cold and warm starts). The
@@ -183,6 +194,23 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrCalApplicationProposedHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetCalApplicationProposed().
   ovrMessage_Notification_Cal_ProposeApplication = 0x2E7451F5,
+
+  /// Sent when the user is finished using the invite panel to send out
+  /// invitations. Contains a list of invitees.
+  ///
+  /// The message will contain a payload of type ::ovrLaunchInvitePanelFlowResultHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetLaunchInvitePanelFlowResult().
+  ovrMessage_Notification_GroupPresence_InvitationsSent = 0x679A84B6,
+
+  /// Sent when a user has chosen to join the destination/lobby/match. Read all
+  /// the fields to figure out where the user wants to go and take the
+  /// appropriate actions to bring them there. If the user is unable to go there,
+  /// provide adequate messaging to the user on why they cannot go there. These
+  /// notifications should be responded to immediately.
+  ///
+  /// The message will contain a payload of type ::ovrGroupPresenceJoinIntentHandle.
+  /// Extract the payload from the message handle with ::ovr_Message_GetGroupPresenceJoinIntent().
+  ovrMessage_Notification_GroupPresence_JoinIntentReceived = 0x773889F6,
 
   /// Sent when the user has chosen to leave the destination/lobby/match from the
   /// Oculus menu. Read the specific fields to check the user is currently from
@@ -282,8 +310,8 @@ typedef enum ovrMessageType_ {
   /// Extract the payload from the message handle with ::ovr_Message_GetRoom().
   ovrMessage_Notification_Room_RoomUpdate = 0x60EC3C2F,
 
-  /// Sent when the user is finished using the invite panel to send out
-  /// invitations. Contains a list of invitees.
+  /// DEPRECATED. Do not use or expose further. Use
+  /// ovrNotification_GroupPresence_InvitationsSent instead
   ///
   /// The message will contain a payload of type ::ovrLaunchInvitePanelFlowResultHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetLaunchInvitePanelFlowResult().
@@ -296,6 +324,14 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrNetworkingPeerHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetNetworkingPeer().
   ovrMessage_Notification_Voip_ConnectRequest = 0x36243816,
+
+  /// Indicates that the current microphone availability state has been updated.
+  /// Use ovr_Voip_GetMicrophoneAvailability() to extract the microphone
+  /// availability state.
+  ///
+  /// The message will contain a payload of type const char *.
+  /// Extract the payload from the message handle with ::ovr_Message_GetString().
+  ovrMessage_Notification_Voip_MicrophoneAvailabilityStateUpdate = 0x3E20CB57,
 
   /// Sent to indicate that the state of the VoIP connection changed. Use
   /// ovr_Message_GetNetworkingPeer() and ovr_NetworkingPeer_GetState() to

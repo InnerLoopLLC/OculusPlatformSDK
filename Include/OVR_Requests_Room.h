@@ -390,7 +390,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_KickUser(ovrID roomID, ovrID userID, i
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_LaunchInvitableUserFlow(ovrID roomID);
 
 /// Removes you from your current room. Returns the solo room you are now in if
@@ -483,7 +483,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_UpdateMembershipLockStatus(ovrID roomI
 ///
 /// First call ::ovr_Message_IsError() to check if an error occurred.
 ///
-/// This response has no payload. If no error occured, the request was successful. Yay!
+/// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_Room_UpdateOwner(ovrID roomID, ovrID userID);
 
 /// Sets the join policy of the user's private room.
