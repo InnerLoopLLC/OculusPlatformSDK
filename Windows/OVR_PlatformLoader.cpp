@@ -40,6 +40,8 @@ limitations under the License.
 #pragma warning(pop)
 #endif
 
+#pragma comment(lib, "advapi32.lib")
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "OVR_Platform.h"
@@ -48,12 +50,6 @@ limitations under the License.
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable : 4996) // 'getenv': This function or variable may be unsafe.
-#endif
-
-#if defined(_DEBUG)
-// OVR_INTERNAL_CODE allows internal builds to ignore signature failure
-// It should never be defined in any build that actually expects to load a signed dll
-#define OVR_INTERNAL_CODE sizeof(NoCompile) == BuiltForInternalOnly
 #endif
 
 //-----------------------------------------------------------------------------------
@@ -111,30 +107,9 @@ typedef FARPROC ModuleFunctionType;
 #define OVR_MAX_PATH _MAX_PATH
 #endif
 
-static size_t OVR_strlcpy(char* dest, const char* src, size_t destsize) {
-  const char* s = src;
-  size_t n = destsize;
-
-  if (n && --n) {
-    do {
-      if ((*dest++ = *s++) == 0)
-        break;
-    } while (--n);
-  }
-
-  if (!n) {
-    if (destsize)
-      *dest = 0;
-    while (*s++) {
-    }
-  }
-
-  return (size_t)((s - src) - 1);
-}
-
-static size_t OVR_strlcat(char* dest, const char* src, size_t destsize) {
-  const size_t d = destsize ? strlen(dest) : 0;
-  const size_t s = strlen(src);
+static size_t OVR_wstrlcat(wchar_t* dest, const wchar_t* src, size_t destsize) {
+  const size_t d = destsize ? wcslen(dest) : 0;
+  const size_t s = wcslen(src);
   const size_t t = s + d;
 
   if (t < destsize)
@@ -149,256 +124,63 @@ static size_t OVR_strlcat(char* dest, const char* src, size_t destsize) {
   return t;
 }
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable : 4201)
-#endif
-
-#include <Softpub.h>
-#include <Wincrypt.h>
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-
-// Expected certificates:
-#define ExpectedNumCertificates 3
-typedef struct CertificateEntry_t {
-  const wchar_t* Issuer;
-  const wchar_t* Subject;
-} CertificateEntry;
-
-static CertificateEntry NewCertificateChainPL[ExpectedNumCertificates] = {
-    {L"DigiCert SHA2 Assured ID Code Signing CA", L"Oculus VR, LLC"},
-    {L"DigiCert Assured ID Root CA", L"DigiCert SHA2 Assured ID Code Signing CA"},
-    {L"DigiCert Assured ID Root CA", L"DigiCert Assured ID Root CA"},
-};
-
-#define CertificateChainCount 1
-static CertificateEntry* AllowedCertificateChainsPL[CertificateChainCount] = {
-    NewCertificateChainPL};
-
-typedef WINCRYPT32API DWORD(WINAPI* PtrCertGetNameStringW)(
-    PCCERT_CONTEXT pCertContext,
-    DWORD dwType,
-    DWORD dwFlags,
-    void* pvTypePara,
-    LPWSTR pszNameString,
-    DWORD cchNameString);
-typedef LONG(WINAPI* PtrWinVerifyTrust)(HWND hwnd, GUID* pgActionID, LPVOID pWVTData);
-typedef CRYPT_PROVIDER_DATA*(WINAPI* PtrWTHelperProvDataFromStateData)(HANDLE hStateData);
-typedef CRYPT_PROVIDER_SGNR*(WINAPI* PtrWTHelperGetProvSignerFromChain)(
-    CRYPT_PROVIDER_DATA* pProvData,
-    DWORD idxSigner,
-    BOOL fCounterSigner,
-    DWORD idxCounterSigner);
-
-static PtrCertGetNameStringW m_PtrCertGetNameStringWPL = 0;
-static PtrWinVerifyTrust m_PtrWinVerifyTrustPL = 0;
-static PtrWTHelperProvDataFromStateData m_PtrWTHelperProvDataFromStateDataPL = 0;
-static PtrWTHelperGetProvSignerFromChain m_PtrWTHelperGetProvSignerFromChainPL = 0;
-
-static int ValidateCertificateContents(CertificateEntry* chain, CRYPT_PROVIDER_SGNR* cps) {
-  int certIndex;
-
-  if (!cps || !cps->pasCertChain || cps->csCertChain != ExpectedNumCertificates) {
-    return -1;
+static bool OVR_GetOculusBaseDirectory(
+    FilePathCharType* directoryPath,
+    size_t directoryPathCapacity) {
+  DWORD length = directoryPathCapacity;
+  HKEY key = 0;
+  // Query the 32bit key even if 64bit build
+  LONG result = RegOpenKeyExW(
+      HKEY_LOCAL_MACHINE, L"Software\\Oculus VR, LLC\\Oculus", 0, KEY_READ | KEY_WOW64_32KEY, &key);
+  if (result != ERROR_SUCCESS) {
+    return false;
   }
 
-  for (certIndex = 0; certIndex < ExpectedNumCertificates; ++certIndex) {
-    CRYPT_PROVIDER_CERT* pCertData = &cps->pasCertChain[certIndex];
-    wchar_t subjectStr[400] = {0};
-    wchar_t issuerStr[400] = {0};
+  result = RegGetValueW(
+      key, NULL, L"Base", RRF_RT_REG_SZ | RRF_ZEROONFAILURE, NULL, (LPBYTE)directoryPath, &length);
+  RegCloseKey(key);
 
-    if ((pCertData->fSelfSigned && !pCertData->fTrustedRoot) || pCertData->fTestCert) {
-      return -2;
-    }
-
-    m_PtrCertGetNameStringWPL(
-        pCertData->pCert,
-        CERT_NAME_ATTR_TYPE,
-        0,
-        (void*)szOID_COMMON_NAME,
-        subjectStr,
-        ARRAYSIZE(subjectStr));
-
-    m_PtrCertGetNameStringWPL(
-        pCertData->pCert,
-        CERT_NAME_ATTR_TYPE,
-        CERT_NAME_ISSUER_FLAG,
-        0,
-        issuerStr,
-        ARRAYSIZE(issuerStr));
-
-    if (wcscmp(subjectStr, chain[certIndex].Subject) != 0 ||
-        wcscmp(issuerStr, chain[certIndex].Issuer) != 0) {
-      return -3;
-    }
-  }
-
-  return 0;
+  return result == ERROR_SUCCESS;
 }
 
-#define OVR_SIGNING_CONVERT_PTR(ftype, fptr, procaddr) \
-  {                                                    \
-    union {                                            \
-      ftype p1;                                        \
-      ModuleFunctionType p2;                           \
-    } u;                                               \
-    u.p2 = procaddr;                                   \
-    fptr = u.p1;                                       \
+static bool IsHighIntegrityLevel() {
+  // Allocate a fixed size buffer for the maximum possible size:
+  // SID_AND_ATTRIBUTES can be the size of a SID + size of DWORD (for attributes).
+  uint8_t mandatoryLabelBuffer[SECURITY_MAX_SID_SIZE + sizeof(DWORD)];
+  DWORD bufferSize;
+  HANDLE processToken;
+  DWORD integrityLevel = SECURITY_MANDATORY_HIGH_RID;
+
+  if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY | TOKEN_QUERY_SOURCE, &processToken) == 0) {
+    return false;
   }
 
-static HANDLE OVR_Win32_SignCheck(
-    FilePathCharType* fullPath,
-    ovrPlatformInitializeResult* outResult) {
-  HANDLE hFile = INVALID_HANDLE_VALUE;
-  WINTRUST_FILE_INFO fileData;
-  WINTRUST_DATA wintrustData;
-  GUID actionGUID = WINTRUST_ACTION_GENERIC_VERIFY_V2;
-  LONG resultStatus;
-  int verified = 0;
-  HMODULE libWinTrust = LoadLibraryW(L"wintrust");
-  HMODULE libCrypt32 = LoadLibraryW(L"crypt32");
-  if (libWinTrust == NULL || libCrypt32 == NULL) {
-    *outResult = ovrPlatformInitialize_UnableToVerify;
-    return INVALID_HANDLE_VALUE;
+  if (GetTokenInformation(
+          processToken,
+          TokenIntegrityLevel,
+          mandatoryLabelBuffer,
+          sizeof(mandatoryLabelBuffer),
+          &bufferSize) != 0) {
+    TOKEN_MANDATORY_LABEL* mandatoryLabel = (TOKEN_MANDATORY_LABEL*)mandatoryLabelBuffer;
+    const DWORD subAuthorityCount = *GetSidSubAuthorityCount(mandatoryLabel->Label.Sid);
+    integrityLevel = *GetSidSubAuthority(mandatoryLabel->Label.Sid, subAuthorityCount - 1);
   }
 
-  OVR_SIGNING_CONVERT_PTR(
-      PtrCertGetNameStringW,
-      m_PtrCertGetNameStringWPL,
-      GetProcAddress(libCrypt32, "CertGetNameStringW"));
-  OVR_SIGNING_CONVERT_PTR(
-      PtrWinVerifyTrust, m_PtrWinVerifyTrustPL, GetProcAddress(libWinTrust, "WinVerifyTrust"));
-  OVR_SIGNING_CONVERT_PTR(
-      PtrWTHelperProvDataFromStateData,
-      m_PtrWTHelperProvDataFromStateDataPL,
-      GetProcAddress(libWinTrust, "WTHelperProvDataFromStateData"));
-  OVR_SIGNING_CONVERT_PTR(
-      PtrWTHelperGetProvSignerFromChain,
-      m_PtrWTHelperGetProvSignerFromChainPL,
-      GetProcAddress(libWinTrust, "WTHelperGetProvSignerFromChain"));
-
-  if (m_PtrCertGetNameStringWPL == NULL || m_PtrWinVerifyTrustPL == NULL ||
-      m_PtrWTHelperProvDataFromStateDataPL == NULL ||
-      m_PtrWTHelperGetProvSignerFromChainPL == NULL) {
-    *outResult = ovrPlatformInitialize_UnableToVerify;
-    return INVALID_HANDLE_VALUE;
-  }
-
-  if (!fullPath) {
-    *outResult = ovrPlatformInitialize_FileInvalid;
-    return INVALID_HANDLE_VALUE;
-  }
-
-  hFile = CreateFileW(
-      fullPath, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, 0);
-
-  if (hFile == INVALID_HANDLE_VALUE) {
-    *outResult = ovrPlatformInitialize_FileInvalid;
-    return INVALID_HANDLE_VALUE;
-  }
-
-  ZeroMemory(&fileData, sizeof(fileData));
-  fileData.cbStruct = sizeof(fileData);
-  fileData.pcwszFilePath = fullPath;
-  fileData.hFile = hFile;
-
-  ZeroMemory(&wintrustData, sizeof(wintrustData));
-  wintrustData.cbStruct = sizeof(wintrustData);
-  wintrustData.pFile = &fileData;
-  wintrustData.dwUnionChoice = WTD_CHOICE_FILE; // Specify WINTRUST_FILE_INFO.
-  wintrustData.dwUIChoice = WTD_UI_NONE; // Do not display any UI.
-  wintrustData.dwUIContext = WTD_UICONTEXT_EXECUTE; // Hint that this is about app execution.
-  wintrustData.fdwRevocationChecks = WTD_REVOKE_NONE;
-  wintrustData.dwProvFlags = WTD_REVOCATION_CHECK_NONE;
-  wintrustData.dwStateAction = WTD_STATEACTION_VERIFY;
-  wintrustData.hWVTStateData = 0;
-
-  resultStatus = m_PtrWinVerifyTrustPL(
-      (HWND)INVALID_HANDLE_VALUE, // Do not display any UI.
-      &actionGUID, // V2 verification
-      &wintrustData);
-
-  if (resultStatus == ERROR_SUCCESS && wintrustData.hWVTStateData != 0 &&
-      wintrustData.hWVTStateData != INVALID_HANDLE_VALUE) {
-    CRYPT_PROVIDER_DATA* cpd = m_PtrWTHelperProvDataFromStateDataPL(wintrustData.hWVTStateData);
-    if (cpd && cpd->csSigners == 1) {
-      CRYPT_PROVIDER_SGNR* cps = m_PtrWTHelperGetProvSignerFromChainPL(cpd, 0, FALSE, 0);
-      int chainIndex;
-      for (chainIndex = 0; chainIndex < CertificateChainCount; ++chainIndex) {
-        CertificateEntry* chain = AllowedCertificateChainsPL[chainIndex];
-        if (0 == ValidateCertificateContents(chain, cps)) {
-          verified = 1;
-          break;
-        }
-      }
-    }
-  }
-
-  wintrustData.dwStateAction = WTD_STATEACTION_CLOSE;
-
-  m_PtrWinVerifyTrustPL(
-      (HWND)INVALID_HANDLE_VALUE, // Do not display any UI.
-      &actionGUID, // V2 verification
-      &wintrustData);
-
-  if (verified != 1) {
-    CloseHandle(hFile);
-    *outResult = ovrPlatformInitialize_SignatureInvalid;
-    return INVALID_HANDLE_VALUE;
-  }
-
-  *outResult = ovrPlatformInitialize_Success;
-  return hFile;
+  CloseHandle(processToken);
+  return integrityLevel > SECURITY_MANDATORY_MEDIUM_RID;
 }
 
 static ModuleHandleType OVR_OpenLibrary(
     const FilePathCharType* libraryPath,
     ovrPlatformInitializeResult* outResult) {
-  DWORD fullPathNameLen = 0;
-  FilePathCharType fullPath[MAX_PATH] = {0};
-  HANDLE hFilePinned = INVALID_HANDLE_VALUE;
-  ModuleHandleType hModule = 0;
-  fullPathNameLen = GetFullPathNameW(libraryPath, MAX_PATH, fullPath, 0);
-  if (fullPathNameLen <= 0 || fullPathNameLen >= MAX_PATH) {
-    *outResult = ovrPlatformInitialize_FileInvalid;
-    return ModuleHandleTypeNull;
-  }
-  fullPath[MAX_PATH - 1] = 0;
-
-  auto signResult = ovrPlatformInitialize_Uninitialized;
-  hFilePinned = OVR_Win32_SignCheck(fullPath, &signResult);
-#ifdef OVR_INTERNAL_CODE
-  // Ignore signature check errors in internal builds, since in-development builds are not signed
-  if (signResult == ovrPlatformInitialize_SignatureInvalid) {
-    signResult = ovrPlatformInitialize_Success;
-  }
-#else // OVR_INTERNAL_CODE
-  if (hFilePinned == INVALID_HANDLE_VALUE) {
-    // Some sort of error verifying the file
-    // Set that as the out result, but try to LoadLibrary anyway and send that as the return value.
-    // If the developer ignores the error they can try to call into the library, it'll be loaded
-    // automatically, and then their call will hit an assert because we didn't call the platform
-    // initialization function.
-    *outResult = signResult;
-    return LoadLibraryW(fullPath);
-  }
-#endif // OVR_INTERNAL_CODE
-
   // In this case we thought we found a valid library at the location, so we'll load it, and if that
   // fails for some reason we'll mark it as an invalid file error.
-  hModule = LoadLibraryW(fullPath);
-
-  if (hFilePinned != INVALID_HANDLE_VALUE) {
-    CloseHandle(hFilePinned);
-  }
+  ModuleHandleType hModule = LoadLibraryW(libraryPath);
 
   if (hModule == ModuleHandleTypeNull) {
     *outResult = ovrPlatformInitialize_FileInvalid;
   } else {
-    *outResult = signResult;
+    *outResult = ovrPlatformInitialize_Success;
   }
   return hModule;
 }
@@ -426,6 +208,7 @@ static ModuleHandleType OVR_FindLibraryPath(
   ModuleHandleType moduleHandle;
   int printfResult;
   FilePathCharType developerDir[OVR_MAX_PATH] = {'\0'};
+  FilePathCharType oculusInstallDir[OVR_MAX_PATH] = {'\0'};
 
 #if defined(_WIN64)
   const char* pBitDepth = "64";
@@ -439,29 +222,32 @@ static ModuleHandleType OVR_FindLibraryPath(
   if (libraryPathCapacity)
     libraryPath[0] = '\0';
 
-#define OVR_FILE_PATH_SEPARATOR "\\"
+#define OVR_FILE_PATH_SEPARATOR L"\\"
 
-  {
-    const char* pLibOvrDllDir =
-        getenv("LIBOVR_DLL_DIR"); // Example value: ..\\LibOVRPlatform\\msvc-out\\x64\\Debug
+  if (!IsHighIntegrityLevel()) {
+    size_t length;
+    errno_t success = _wgetenv_s(&length, developerDir, _countof(developerDir), L"LIBOVR_DLL_DIR");
+    if ((success == 0) && (length != 0) && (length < _countof(developerDir)) &&
+        developerDir[length - 2] != OVR_FILE_PATH_SEPARATOR[0]) {
+      OVR_wstrlcat(developerDir, OVR_FILE_PATH_SEPARATOR, _countof(developerDir));
+    }
+  }
 
-    if (pLibOvrDllDir) {
-      char developerDir8[OVR_MAX_PATH];
-      size_t length = OVR_strlcpy(
-          developerDir8,
-          pLibOvrDllDir,
-          sizeof(developerDir8)); // If missing a trailing path separator then append one.
+  if (OVR_GetOculusBaseDirectory(oculusInstallDir, _countof(oculusInstallDir))) {
+    size_t baseDirLength = wcslen(oculusInstallDir);
 
-      if ((length > 0) && (length < sizeof(developerDir8)) &&
-          (developerDir8[length - 1] != OVR_FILE_PATH_SEPARATOR[0])) {
-        length = OVR_strlcat(developerDir8, OVR_FILE_PATH_SEPARATOR, sizeof(developerDir8));
+    // If missing a trailing path separator then append one.
+    if ((baseDirLength > 0) && (baseDirLength < _countof(oculusInstallDir)) &&
+        (oculusInstallDir[baseDirLength - 1] != OVR_FILE_PATH_SEPARATOR[0])) {
+      baseDirLength =
+          OVR_wstrlcat(oculusInstallDir, OVR_FILE_PATH_SEPARATOR, _countof(oculusInstallDir));
+    }
 
-        if (length < sizeof(developerDir8)) {
-          size_t i;
-          for (i = 0; i <= length; ++i) // ASCII conversion of 8 to 16 bit text.
-            developerDir[i] = (FilePathCharType)(uint8_t)developerDir8[i];
-        }
-      }
+#define OVR_RUNTIME_PATH L"Support\\oculus-runtime\\"
+
+    if ((baseDirLength > 0) &&
+        (baseDirLength + _countof(OVR_RUNTIME_PATH) < _countof(oculusInstallDir))) {
+      baseDirLength = OVR_wstrlcat(oculusInstallDir, OVR_RUNTIME_PATH, _countof(oculusInstallDir));
     }
   }
 
@@ -470,42 +256,30 @@ static ModuleHandleType OVR_FindLibraryPath(
   {
     size_t i;
 
-    // On Windows, only search the developer directory and the usual path
+    // On Windows, only search the developer directory and the install path
     const FilePathCharType* directoryArray[2];
-    directoryArray[0] = developerDir; // Developer directory.
-    // No directory, which causes Windows to use the standard search strategy to find the DLL.
-    directoryArray[1] = L"";
+    directoryArray[0] = developerDir[0] != '\0' ? developerDir : NULL; // Developer directory
+    directoryArray[1] = oculusInstallDir;
 
     for (i = 0; i < sizeof(directoryArray) / sizeof(directoryArray[0]); ++i) {
-      printfResult = swprintf(
-          libraryPath,
-          libraryPathCapacity,
-          L"%lsLibOVRPlatform%hs_%d.dll",
-          directoryArray[i],
-          pBitDepth,
-          requestedMajorVersion);
+      if (directoryArray[i] != NULL) {
+        printfResult = swprintf(
+            libraryPath,
+            libraryPathCapacity,
+            L"%lsLibOVRPlatform%hs_%d.dll",
+            directoryArray[i],
+            pBitDepth,
+            requestedMajorVersion);
 
-      if (*directoryArray[i] == 0) {
-        int k;
-        FilePathCharType foundPath[MAX_PATH] = {0};
-        DWORD searchResult = SearchPathW(NULL, libraryPath, NULL, MAX_PATH, foundPath, NULL);
-        if (searchResult <= 0 || searchResult >= libraryPathCapacity) {
-          continue;
-        }
-        foundPath[MAX_PATH - 1] = 0;
-        for (k = 0; k < MAX_PATH; ++k) {
-          libraryPath[k] = foundPath[k];
-        }
-      }
-
-      if ((printfResult >= 0) && (printfResult < (int)libraryPathCapacity)) {
-        auto openResult = ovrPlatformInitialize_Uninitialized;
-        moduleHandle = OVR_OpenLibrary(libraryPath, &openResult);
-        if (moduleHandle != ModuleHandleTypeNull) {
-          *outResult = openResult;
-          return moduleHandle;
-        } else {
-          lastOpenResult = openResult;
+        if ((printfResult >= 0) && (printfResult < (int)libraryPathCapacity)) {
+          auto openResult = ovrPlatformInitialize_Uninitialized;
+          moduleHandle = OVR_OpenLibrary(libraryPath, &openResult);
+          if (moduleHandle != ModuleHandleTypeNull) {
+            *outResult = openResult;
+            return moduleHandle;
+          } else {
+            lastOpenResult = openResult;
+          }
         }
       }
     }
