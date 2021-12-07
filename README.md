@@ -9,4 +9,6 @@ This is literally just the Oculus Platform SDK obtained directly from <a href="h
 
 If you want to download the SDK, please do so from the official source. This is NOT the official source.
 
-All files in this repo (other than this readme) are property of Oculus/Facebook/Meta and pursuant to the <a href="https://developer.oculus.com/licenses/oculussdk/">Oculus SDK License Agreement</a>.
+All files in this repo are property of Oculus/Facebook/Meta and pursuant to the <a href="https://developer.oculus.com/licenses/oculussdk/">Oculus SDK License Agreement</a>.
+
+Copyright © Facebook Technologies, LLC and its affiliates. All rights reserved
