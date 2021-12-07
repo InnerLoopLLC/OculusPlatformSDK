@@ -15,51 +15,35 @@ typedef struct ovrRichPresenceOptions* ovrRichPresenceOptionsHandle;
 
 OVRP_PUBLIC_FUNCTION(ovrRichPresenceOptionsHandle) ovr_RichPresenceOptions_Create();
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_Destroy(ovrRichPresenceOptionsHandle handle);
-/// This the unique API Name that refers to an in-app destination
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetDestinationApiName
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetApiName(ovrRichPresenceOptionsHandle handle, const char * value);
 /// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetArgsString(ovrRichPresenceOptionsHandle handle, const char* key, const char* value);
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_ClearArgs(ovrRichPresenceOptionsHandle handle);
-/// The current amount of users that have joined this user's
-/// squad/team/game/match etc.
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetCurrentCapacity(ovrRichPresenceOptionsHandle handle, unsigned int value);
-/// Optionally passed in to use a different deeplink message than the one
-/// defined in the api_name
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetLobbySessionId or
+/// ovr_GroupPresenceOptions_SetMatchSessionId to specify the session
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetDeeplinkMessageOverride(ovrRichPresenceOptionsHandle handle, const char * value);
-/// The time the current match/game/round etc. ends
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetEndTime(ovrRichPresenceOptionsHandle handle, unsigned long long value);
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetExtraContext(ovrRichPresenceOptionsHandle handle, ovrRichPresenceExtraContext value);
-/// Users reported with the same instance ID will be considered to be together
-/// and could interact with each other. Renamed to
-/// ovr_RichPresenceOptions_SetInstanceId
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetMatchSessionId
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetInstanceId(ovrRichPresenceOptionsHandle handle, const char * value);
-/// Set whether or not the person is shown as active or idle
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetIsIdle(ovrRichPresenceOptionsHandle handle, bool value);
-/// Set whether or not the person is shown as joinable or not to others. A user
-/// that is joinable can invite others to join them. Set this to false if other
-/// users would not be able to join this user. For example: the current session
-/// is full, or only the host can invite others and the current user is not the
-/// host.
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetIsJoinable
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetIsJoinable(ovrRichPresenceOptionsHandle handle, bool value);
 /// DEPRECATED: unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetJoinableId(ovrRichPresenceOptionsHandle handle, const char * value);
-/// This is a session that represents all the users that are playing a specific
-/// instance of a map, game mode, round, etc. This can include users from
-/// multiple different lobbies that joined together and the users may or may
-/// not remain together after the match is over. Users with the same match
-/// session id in their rich presence will not show up in the Roster, but will
-/// show up as "Recently Played with" for future invites.
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetLobbySessionId
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetLobbySessionId(ovrRichPresenceOptionsHandle handle, const char * value);
-/// This is a session that represents all the users that are playing a specific
-/// instance of a map, game mode, round, etc. This can include users from
-/// multiple different lobbies that joined together and the users may or may
-/// not remain together after the match is over. Users with the same match
-/// session id in their rich presence will not show up in the Roster, but will
-/// show up as "Recently Played with" for future invites.
+/// DEPRECATED: Use ovr_GroupPresenceOptions_SetMatchSessionId
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetMatchSessionId(ovrRichPresenceOptionsHandle handle, const char * value);
-/// The maximum that can join this user
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetMaxCapacity(ovrRichPresenceOptionsHandle handle, unsigned int value);
-/// The time the current match/game/round etc. started
+/// DEPRECATED: Unused
 OVRP_PUBLIC_FUNCTION(void) ovr_RichPresenceOptions_SetStartTime(ovrRichPresenceOptionsHandle handle, unsigned long long value);
 
 #endif

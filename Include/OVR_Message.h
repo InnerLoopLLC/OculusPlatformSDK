@@ -8,6 +8,7 @@
 #include "OVR_AchievementDefinitionArray.h"
 #include "OVR_AchievementProgressArray.h"
 #include "OVR_AchievementUpdate.h"
+#include "OVR_ApplicationInviteArray.h"
 #include "OVR_ApplicationVersion.h"
 #include "OVR_AssetDetails.h"
 #include "OVR_AssetDetailsArray.h"
@@ -77,6 +78,7 @@
 #include "OVR_RoomInviteNotification.h"
 #include "OVR_RoomInviteNotificationArray.h"
 #include "OVR_SdkAccountArray.h"
+#include "OVR_SendInvitesResult.h"
 #include "OVR_ShareMediaResult.h"
 #include "OVR_SystemVoipState.h"
 #include "OVR_Types.h"
@@ -94,6 +96,7 @@ OVRP_PUBLIC_FUNCTION(ovrAbuseReportRecordingHandle)               ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrAchievementDefinitionArrayHandle)         ovr_Message_GetAchievementDefinitionArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrAchievementProgressArrayHandle)           ovr_Message_GetAchievementProgressArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrAchievementUpdateHandle)                  ovr_Message_GetAchievementUpdate(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrApplicationInviteArrayHandle)             ovr_Message_GetApplicationInviteArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrApplicationVersionHandle)                 ovr_Message_GetApplicationVersion(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrAssetDetailsHandle)                       ovr_Message_GetAssetDetails(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrAssetDetailsArrayHandle)                  ovr_Message_GetAssetDetailsArray(const ovrMessageHandle obj);
@@ -164,6 +167,7 @@ OVRP_PUBLIC_FUNCTION(ovrRoomArrayHandle)                          ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrRoomInviteNotificationHandle)             ovr_Message_GetRoomInviteNotification(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrRoomInviteNotificationArrayHandle)        ovr_Message_GetRoomInviteNotificationArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSdkAccountArrayHandle)                    ovr_Message_GetSdkAccountArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrSendInvitesResultHandle)                  ovr_Message_GetSendInvitesResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrShareMediaResultHandle)                   ovr_Message_GetShareMediaResult(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(const char *)                                ovr_Message_GetString(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrSystemVoipStateHandle)                    ovr_Message_GetSystemVoipState(const ovrMessageHandle obj);

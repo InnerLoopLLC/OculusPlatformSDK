@@ -6,12 +6,14 @@
 #include "OVR_Types.h"
 #include "OVR_Platform_Defs.h"
 
+#include "OVR_ApplicationInviteArray.h"
+#include "OVR_ApplicationInviteArray.h"
 #include "OVR_GroupPresenceOptions.h"
 #include "OVR_InviteOptions.h"
 #include "OVR_MultiplayerErrorOptions.h"
 #include "OVR_RosterOptions.h"
 
-/// Clear rich presence for running app
+/// Clear group presence for running app
 ///
 /// A message with type ::ovrMessage_GroupPresence_Clear will be generated in response.
 ///
@@ -19,6 +21,38 @@
 ///
 /// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_Clear();
+
+/// Returns a list of users that can be invited to your current lobby. These
+/// are pulled from your friends and recently met lists.
+///
+/// A message with type ::ovrMessage_GroupPresence_GetInvitableUsers will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrUserArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetUserArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_GetInvitableUsers(ovrInviteOptionsHandle options);
+
+/// Get the next page of entries
+///
+/// A message with type ::ovrMessage_GroupPresence_GetNextApplicationInviteArrayPage will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrApplicationInviteArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetApplicationInviteArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_GetNextApplicationInviteArrayPage(ovrApplicationInviteArrayHandle handle);
+
+/// Returns a list of users that can be invited to your current lobby. These
+/// are pulled from your friends and recently met lists.
+///
+/// A message with type ::ovrMessage_GroupPresence_GetSentInvites will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrApplicationInviteArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetApplicationInviteArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_GetSentInvites();
 
 /// Launch the flow to allow the user to invite others to their current
 /// session. This can only be used if the user is in a joinable session.
@@ -64,7 +98,18 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_LaunchRejoinDialog(const char
 /// This response has no payload. If no error occurred, the request was successful. Yay!
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_LaunchRosterPanel(ovrRosterOptionsHandle options);
 
-/// Set rich presence for running app
+/// Returns a list of users that can be invited to your current lobby. These
+/// are pulled from your friends and recently met lists.
+///
+/// A message with type ::ovrMessage_GroupPresence_SendInvites will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrSendInvitesResultHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetSendInvitesResult().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SendInvites(ovrID *userIDs, unsigned int userIDLength);
+
+/// Set group presence for running app
 ///
 /// A message with type ::ovrMessage_GroupPresence_Set will be generated in response.
 ///
@@ -74,7 +119,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_LaunchRosterPanel(ovrRosterOp
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_Set(ovrGroupPresenceOptionsHandle groupPresenceOptions);
 
 /// Replaces the user's current destination for the provided one. All other
-/// existing rich presence parameters will remain the same.
+/// existing group presence parameters will remain the same.
 ///
 /// A message with type ::ovrMessage_GroupPresence_SetDestination will be generated in response.
 ///
@@ -84,7 +129,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_Set(ovrGroupPresenceOptionsHa
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SetDestination(const char *api_name);
 
 /// Set if the current user's destination and session is joinable while keeping
-/// the other rich presence parameters the same. If the destination or session
+/// the other group presence parameters the same. If the destination or session
 /// ids of the user is not set, they cannot be set to joinable.
 ///
 /// A message with type ::ovrMessage_GroupPresence_SetIsJoinable will be generated in response.
@@ -95,7 +140,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SetDestination(const char *ap
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SetIsJoinable(bool is_joinable);
 
 /// Replaces the user's current lobby session id for the provided one. All
-/// other existing rich presence parameters will remain the same.
+/// other existing group presence parameters will remain the same.
 ///
 /// A message with type ::ovrMessage_GroupPresence_SetLobbySession will be generated in response.
 ///
@@ -105,7 +150,7 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SetIsJoinable(bool is_joinabl
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_GroupPresence_SetLobbySession(const char *id);
 
 /// Replaces the user's current match session id for the provided one. All
-/// other existing rich presence parameters will remain the same.
+/// other existing group presence parameters will remain the same.
 ///
 /// A message with type ::ovrMessage_GroupPresence_SetMatchSession will be generated in response.
 ///
