@@ -185,16 +185,4 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetUserProof();
 /// Extract the payload from the message handle with ::ovr_Message_GetLaunchFriendRequestFlowResult().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_LaunchFriendRequestFlow(ovrID userID);
 
-/// Launch the profile of the given user. The profile surfaces information
-/// about the user and supports relevant actions that the viewer may take on
-/// that user, e.g. sending a friend request.
-/// \param userID User ID for profile being viewed
-///
-/// A message with type ::ovrMessage_User_LaunchProfile will be generated in response.
-///
-/// First call ::ovr_Message_IsError() to check if an error occurred.
-///
-/// This response has no payload. If no error occurred, the request was successful. Yay!
-OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_LaunchProfile(ovrID userID);
-
 #endif

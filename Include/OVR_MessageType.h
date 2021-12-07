@@ -94,10 +94,6 @@ typedef enum ovrMessageType_ {
   ovrMessage_Leaderboard_GetPreviousEntries                      = 0x4901DAC0, ///< Generated in response to ovr_Leaderboard_GetPreviousEntries()
   ovrMessage_Leaderboard_WriteEntry                              = 0x117FC8FE, ///< Generated in response to ovr_Leaderboard_WriteEntry()
   ovrMessage_Leaderboard_WriteEntryWithSupplementaryMetric       = 0x72C692FA, ///< Generated in response to ovr_Leaderboard_WriteEntryWithSupplementaryMetric()
-  ovrMessage_Livestreaming_GetStatus                             = 0x489A6995, ///< Generated in response to ovr_Livestreaming_GetStatus()
-  ovrMessage_Livestreaming_LaunchLivestreamingFlow               = 0x6AB156BD, ///< Generated in response to ovr_Livestreaming_LaunchLivestreamingFlow()
-  ovrMessage_Livestreaming_PauseStream                           = 0x369C7683, ///< Generated in response to ovr_Livestreaming_PauseStream()
-  ovrMessage_Livestreaming_ResumeStream                          = 0x22526D8F, ///< Generated in response to ovr_Livestreaming_ResumeStream()
   ovrMessage_Matchmaking_Browse                                  = 0x1E6532C8, ///< Generated in response to ovr_Matchmaking_Browse()
   ovrMessage_Matchmaking_Browse2                                 = 0x66429E5B, ///< Generated in response to ovr_Matchmaking_Browse2()
   ovrMessage_Matchmaking_Cancel                                  = 0x206849AF, ///< Generated in response to ovr_Matchmaking_Cancel()
@@ -164,7 +160,6 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetSdkAccounts                                 = 0x67526A83, ///< Generated in response to ovr_User_GetSdkAccounts()
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
   ovrMessage_User_LaunchFriendRequestFlow                        = 0x0904B598, ///< Generated in response to ovr_User_LaunchFriendRequestFlow()
-  ovrMessage_User_LaunchProfile                                  = 0x0A397297, ///< Generated in response to ovr_User_LaunchProfile()
   ovrMessage_Voip_GetMicrophoneAvailability                      = 0x744CE345, ///< Generated in response to ovr_Voip_GetMicrophoneAvailability()
   ovrMessage_Voip_SetSystemVoipSuppressed                        = 0x453FC9AA, ///< Generated in response to ovr_Voip_SetSystemVoipSuppressed()
 
@@ -353,6 +348,12 @@ typedef enum ovrMessageType_ {
   /// The message will contain a payload of type ::ovrSystemVoipStateHandle.
   /// Extract the payload from the message handle with ::ovr_Message_GetSystemVoipState().
   ovrMessage_Notification_Voip_SystemVoipState = 0x58D254A5,
+
+  /// Get vr camera related webrtc data channel messages for update.
+  ///
+  /// The message will contain a payload of type const char *.
+  /// Extract the payload from the message handle with ::ovr_Message_GetString().
+  ovrMessage_Notification_Vrcamera_GetDataChannelMessageUpdate = 0x6EE4F33C,
 
   /// Get surface and update action from platform webrtc for update.
   ///
