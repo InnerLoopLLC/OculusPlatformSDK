@@ -85,6 +85,7 @@
 #include "OVR_User.h"
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
+#include "OVR_UserCapabilityArray.h"
 #include "OVR_UserDataStoreUpdateResponse.h"
 #include "OVR_UserProof.h"
 #include "OVR_UserReportID.h"
@@ -175,6 +176,7 @@ OVRP_PUBLIC_FUNCTION(ovrMessageType)                              ovr_Message_Ge
 OVRP_PUBLIC_FUNCTION(ovrUserHandle)                               ovr_Message_GetUser(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserAndRoomArrayHandle)                   ovr_Message_GetUserAndRoomArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserArrayHandle)                          ovr_Message_GetUserArray(const ovrMessageHandle obj);
+OVRP_PUBLIC_FUNCTION(ovrUserCapabilityArrayHandle)                ovr_Message_GetUserCapabilityArray(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserDataStoreUpdateResponseHandle)        ovr_Message_GetUserDataStoreUpdateResponse(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserProofHandle)                          ovr_Message_GetUserProof(const ovrMessageHandle obj);
 OVRP_PUBLIC_FUNCTION(ovrUserReportIDHandle)                       ovr_Message_GetUserReportID(const ovrMessageHandle obj);

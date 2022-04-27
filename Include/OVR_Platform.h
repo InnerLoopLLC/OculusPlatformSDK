@@ -119,6 +119,8 @@
 #include "OVR_UserAndRoom.h"
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
+#include "OVR_UserCapability.h"
+#include "OVR_UserCapabilityArray.h"
 #include "OVR_UserDataStoreUpdateResponse.h"
 #include "OVR_UserProof.h"
 #include "OVR_UserReportID.h"

@@ -9,6 +9,7 @@
 #include "OVR_AbuseReportOptions.h"
 #include "OVR_UserAndRoomArray.h"
 #include "OVR_UserArray.h"
+#include "OVR_UserCapabilityArray.h"
 #include "OVR_UserOptions.h"
 
 /// \file
@@ -134,6 +135,16 @@ OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetNextUserAndRoomArrayPage(ovrUserAnd
 /// If no error occurred, the message will contain a payload of type ::ovrUserArrayHandle.
 /// Extract the payload from the message handle with ::ovr_Message_GetUserArray().
 OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetNextUserArrayPage(ovrUserArrayHandle handle);
+
+/// Get the next page of entries
+///
+/// A message with type ::ovrMessage_User_GetNextUserCapabilityArrayPage will be generated in response.
+///
+/// First call ::ovr_Message_IsError() to check if an error occurred.
+///
+/// If no error occurred, the message will contain a payload of type ::ovrUserCapabilityArrayHandle.
+/// Extract the payload from the message handle with ::ovr_Message_GetUserCapabilityArray().
+OVRP_PUBLIC_FUNCTION(ovrRequest) ovr_User_GetNextUserCapabilityArrayPage(ovrUserCapabilityArrayHandle handle);
 
 /// returns an ovrID which is unique per org. allows different apps within the
 /// same org to identify the user.

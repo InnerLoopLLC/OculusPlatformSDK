@@ -160,6 +160,7 @@ typedef enum ovrMessageType_ {
   ovrMessage_User_GetLoggedInUserRecentlyMetUsersAndRooms        = 0x295FBA30, ///< Generated in response to ovr_User_GetLoggedInUserRecentlyMetUsersAndRooms()
   ovrMessage_User_GetNextUserAndRoomArrayPage                    = 0x7FBDD2DF, ///< Generated in response to ovr_User_GetNextUserAndRoomArrayPage()
   ovrMessage_User_GetNextUserArrayPage                           = 0x267CF743, ///< Generated in response to ovr_User_GetNextUserArrayPage()
+  ovrMessage_User_GetNextUserCapabilityArrayPage                 = 0x2309F399, ///< Generated in response to ovr_User_GetNextUserCapabilityArrayPage()
   ovrMessage_User_GetOrgScopedID                                 = 0x18F0B01B, ///< Generated in response to ovr_User_GetOrgScopedID()
   ovrMessage_User_GetSdkAccounts                                 = 0x67526A83, ///< Generated in response to ovr_User_GetSdkAccounts()
   ovrMessage_User_GetUserProof                                   = 0x22810483, ///< Generated in response to ovr_User_GetUserProof()
